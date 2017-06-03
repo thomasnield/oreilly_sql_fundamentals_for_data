@@ -1,0 +1,631 @@
+<h1 id="section-iii---select">Section III - SELECT</h1>
+<h3 id="selecting-all-columns">3.1: Selecting all columns</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> CUSTOMER;</code></pre></div>
+<h3 id="selecting-specific-columns">3.2: Selecting specific columns</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> CUSTOMER_ID, NAME <span class="kw">FROM</span> CUSTOMER;</code></pre></div>
+<h3 id="expressions">3.3: Expressions</h3>
+<p>First, select everything from <code>PRODUCT</code></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> PRODUCT;</code></pre></div>
+<p>You can use expressions by declaring a <code>TAXED_PRICE</code>. This is not a column, but rather something that is calculated every time this query is executed.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> PRODUCT_ID,
+DESCRIPTION,
+PRICE,
+PRICE * <span class="fl">1.07</span> <span class="kw">AS</span> TAXED_PRICE
+<span class="kw">FROM</span> PRODUCT;</code></pre></div>
+<p>You can also use aliases to declare an <code>UNTAXED_PRICE</code> column off the <code>PRICE</code>, without any expression.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> PRODUCT_ID,
+DESCRIPTION,
+PRICE <span class="kw">as</span> UNTAXED_PRICE,
+PRICE * <span class="fl">1.07</span> <span class="kw">AS</span> TAXED_PRICE
+<span class="kw">FROM</span> PRODUCT;</code></pre></div>
+<h3 id="using-round-function">3.4: Using <code>round()</code> Function</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> PRODUCT_ID,
+DESCRIPTION,
+PRICE,
+<span class="fu">round</span>(PRICE * <span class="fl">1.07</span>, <span class="dv">2</span>) <span class="kw">AS</span> TAXED_PRICE
+
+<span class="kw">FROM</span> PRODUCT;</code></pre></div>
+<p><strong>SWITCH TO SLIDES</strong> FOR MATHEMATICAL OPERATORS</p>
+<h3 id="text-concatenation">3.5: Text Concatenation</h3>
+<p>You can merge text via concatenation. For instance, you can concatenate two fields and put a comma and space <code>,</code> in between.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> NAME,
+CITY | | <span class="st">&#39;, &#39;</span> | | STATE <span class="kw">AS</span> LOCATION
+<span class="kw">FROM</span> CUSTOMER;</code></pre></div>
+<p>You can concatenate several fields to create an address.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> NAME,
+STREET_ADDRESS | | <span class="st">&#39; &#39;</span> | | CITY | | <span class="st">&#39;, &#39;</span> | | STATE | | <span class="st">&#39; &#39;</span> | | ZIP <span class="kw">AS</span> SHIP_ADDRESS
+<span class="kw">FROM</span> CUSTOMER;</code></pre></div>
+<p>This works with any data types, like numbers, texts, and dates. Also note that some platforms use <code>concat()</code> function instead of double pipes <code>||</code></p>
+<p><strong>SWITCH TO SLIDES</strong> FOR EXERCISE ## Section IV- WHERE</p>
+<h3 id="getting-year-2010-records">4.1: Getting year 2010 records</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">year</span> = <span class="dv">2010</span>;</code></pre></div>
+<h3 id="getting-non-2010-records">4.2: Getting non-2010 records</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">year</span> != <span class="dv">2010</span>;</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">year</span> &lt;&gt; <span class="dv">2010</span>;</code></pre></div>
+<h3 id="getting-records-between-2005-and-2010">4.3: Getting records between 2005 and 2010</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">year</span> <span class="kw">BETWEEN</span> <span class="dv">2005</span> <span class="kw">and</span> <span class="dv">2010</span></code></pre></div>
+<h3 id="using-and">4.4: Using <code>AND</code></h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">year</span> &gt;= <span class="dv">2005</span> <span class="kw">and</span> <span class="dt">year</span> &lt;= <span class="dv">2010</span></code></pre></div>
+<h3 id="exclusive-range">4.5: Exclusive Range</h3>
+<p>This will get the years between 2005 and 2010, but exclude 2005 and 2010</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">year</span> &gt; <span class="dv">2005</span> <span class="kw">and</span> <span class="dt">year</span> &lt; <span class="dv">2010</span></code></pre></div>
+<h3 id="using-or">4.6: Using <code>OR</code></h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">MONTH</span> = <span class="dv">3</span>
+<span class="kw">OR</span> <span class="dt">MONTH</span> = <span class="dv">6</span>
+<span class="kw">OR</span> <span class="dt">MONTH</span> = <span class="dv">9</span>
+<span class="kw">OR</span> <span class="dt">MONTH</span> = <span class="dv">12</span></code></pre></div>
+<h3 id="using-in">4.7: Using <code>IN</code></h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">MONTH</span> <span class="kw">IN</span> (<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">9</span>,<span class="dv">12</span>);</code></pre></div>
+<h3 id="using-not-in">4.8: Using <code>NOT IN</code></h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">MONTH</span> <span class="kw">NOT</span> <span class="kw">IN</span> (<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">9</span>,<span class="dv">12</span>);</code></pre></div>
+<h3 id="using-modulus">4.9: Using Modulus</h3>
+<p>The modulus will perform division but return the remainder. So a remainder of 0 means the two numbers divide evenly.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">MONTH</span> % <span class="dv">3</span> = <span class="dv">0</span>;</code></pre></div>
+<h3 id="using-where-on-text">4.10: Using <code>WHERE</code> on TEXT</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> report_code = <span class="st">&#39;513A63&#39;</span></code></pre></div>
+<h3 id="using-in-with-text">4.11: Using <code>IN</code> with text</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> report_code <span class="kw">IN</span> (<span class="st">&#39;513A63&#39;</span>,<span class="st">&#39; 1F8A7B&#39;</span>,<span class="st">&#39; EF616A&#39;</span>)</code></pre></div>
+<h3 id="using-length-function">4.12: Using <code>length()</code> function</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="fu">length</span>(report_code) != <span class="dv">6</span></code></pre></div>
+<h3 id="using-like-for-any-characters">4.13: Using <code>LIKE</code> for any characters</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> report_code <span class="kw">LIKE</span> <span class="st">&#39;A%&#39;</span>;</code></pre></div>
+<h3 id="using-like-for-one-character">4.14: Using <code>LIKE</code> for one character</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> report_code <span class="kw">LIKE</span> <span class="st">&#39;B_C%&#39;</span>;</code></pre></div>
+<blockquote>
+<p>For <code>LIKE</code>, <code>%</code> is used in a different context than modulus <code>%</code></p>
+</blockquote>
+<h3 id="true-booleans-1">4.15: True Booleans 1</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado = <span class="dv">1</span> <span class="kw">AND</span> hail = <span class="dv">1</span>;</code></pre></div>
+<h3 id="true-booleans-2">4.16: True Booleans 2</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado <span class="kw">AND</span> hail</code></pre></div>
+<h3 id="false-booleans-1">4.17: False Booleans 1</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado = <span class="dv">0</span> <span class="kw">AND</span> hail = <span class="dv">1</span>;</code></pre></div>
+<h3 id="false-booleans-2">4.18: False Booleans 2</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="kw">NOT</span> tornado <span class="kw">AND</span> hail;</code></pre></div>
+<h3 id="handling-null">4.19: Handling <code>NULL</code></h3>
+<p>A <code>NULL</code> is an absent value. It is not zero, empty text ' ', or any value. It is blank.</p>
+<p>To check for a null value:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> snow_depth <span class="kw">IS</span> <span class="kw">NULL</span>;</code></pre></div>
+<h3 id="handling-null-in-conditions">4.20: Handling <code>NULL</code> in conditions</h3>
+<p>Nulls will not qualify with any condition that doesn't explicitly handle it.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> precipitation &lt;= <span class="fl">0.5</span>;</code></pre></div>
+<p>If you want to include nulls, do this:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> precipitation <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> precipitation &lt;= <span class="fl">0.5</span>;</code></pre></div>
+<p>You can also use a <code>coalesce()</code> function to turn a null value into a default value, if it indeed is null.</p>
+<p>This will treat all null values as a 0.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="kw">coalesce</span>(precipitation, <span class="dv">0</span>) &lt;= <span class="fl">0.5</span>;</code></pre></div>
+<h3 id="combining-and-and-or">4.21: Combining <code>AND</code> and <code>OR</code></h3>
+<p>Querying for sleet or snow</p>
+<p>Problematic. What belongs to the <code>AND</code> and what belongs to the <code>OR</code>?</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> rain = <span class="dv">1</span> <span class="kw">AND</span> temperature &lt;= <span class="dv">32</span>
+<span class="kw">OR</span> snow_depth &gt; <span class="dv">0</span>;</code></pre></div>
+<p>You must group up the sleet condition in parenthesis so it is treated as one unit.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> (rain = <span class="dv">1</span> <span class="kw">AND</span> temperature &lt;= <span class="dv">32</span>)
+<span class="kw">OR</span> snow_depth &gt; <span class="dv">0</span>;</code></pre></div>
+<h1 id="section-v--group-by-and-order-by">Section V- GROUP BY and ORDER BY</h1>
+<h3 id="getting-a-count-of-records">5.1: Getting a count of records</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">count</span>(*) <span class="kw">as</span> record_count <span class="kw">FROM</span> station_data</code></pre></div>
+<h3 id="getting-a-count-of-records-with-a-condition">5.2 Getting a count of records with a condition</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">count</span>(*) <span class="kw">as</span> record_count <span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado = <span class="dv">1</span></code></pre></div>
+<h3 id="getting-a-count-by-year">5.3 Getting a count by year</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>, <span class="fu">count</span>(*) <span class="kw">as</span> record_count
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado = <span class="dv">1</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span></code></pre></div>
+<h3 id="getting-a-count-by-year-month">5.4 Getting a count by year, month</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>, <span class="dt">month</span>, <span class="fu">count</span>(*) <span class="kw">as</span> record_count
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado = <span class="dv">1</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span>, <span class="dt">month</span></code></pre></div>
+<h3 id="getting-a-count-by-year-month-with-ordinal-index">5.5 Getting a count by year, month with ordinal index</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>, <span class="dt">month</span>, <span class="fu">count</span>(*) <span class="kw">as</span> record_count
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado = <span class="dv">1</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>, <span class="dv">2</span></code></pre></div>
+<h3 id="using-order-by">5.6 Using ORDER BY</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>, <span class="dt">month</span>, <span class="fu">count</span>(*) <span class="kw">as</span> record_count
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado = <span class="dv">1</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span>, <span class="dt">month</span>
+<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">year</span>, <span class="dt">month</span></code></pre></div>
+<h3 id="using-order-by-with-desc">5.7 Using ORDER BY with DESC</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>, <span class="dt">month</span>, <span class="fu">count</span>(*) <span class="kw">as</span> record_count
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado = <span class="dv">1</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span>, <span class="dt">month</span>
+<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">year</span> <span class="kw">DESC</span>, <span class="dt">month</span></code></pre></div>
+<h3 id="counting-non-null-values">5.8 Counting non-null values</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">COUNT</span>(snow_depth) <span class="kw">as</span> recorded_snow_depth_count
+<span class="kw">FROM</span> station_data</code></pre></div>
+<h3 id="average-temperature-by-month-since-year-2000">5.9 Average temperature by month since year 2000</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">month</span>, <span class="fu">AVG</span>(temperature) <span class="kw">as</span> avg_temp
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">year</span> &gt;= <span class="dv">2000</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">month</span></code></pre></div>
+<h3 id="average-temperature-with-rounding-by-month-since-year-2000">5.10 Average temperature (with rounding) by month since year 2000</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">month</span>, <span class="fu">round</span>(<span class="fu">AVG</span>(temperature),<span class="dv">2</span>) <span class="kw">as</span> avg_temp
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">year</span> &gt;= <span class="dv">2000</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">month</span></code></pre></div>
+<h3 id="sum-of-snow-depth">5.11 Sum of snow depth</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>, <span class="fu">SUM</span>(snow_depth) <span class="kw">as</span> total_snow
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">year</span> &gt;= <span class="dv">2005</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span></code></pre></div>
+<h3 id="multiple-aggregations">5.12 Multiple aggregations</h3>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>,
+<span class="fu">SUM</span>(snow_depth) <span class="kw">as</span> total_snow,
+<span class="fu">SUM</span>(precipitation) <span class="kw">as</span> total_precipitation,
+<span class="fu">MAX</span>(precipitation) <span class="kw">as</span> max_precipitation
+
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> <span class="dt">year</span> &gt;= <span class="dv">2005</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span></code></pre></div>
+<h3 id="exercises">EXERCISES</h3>
+<p>Flip to slides</p>
+<h3 id="using-having">5.13 Using HAVING</h3>
+<p>You cannot use WHERE on aggregations. This will result in an error.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>,
+<span class="fu">SUM</span>(precipitation) <span class="kw">as</span> total_precipitation
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> total_precipitation &gt; <span class="dv">30</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span></code></pre></div>
+<p>You can however, use HAVING.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>,
+<span class="fu">SUM</span>( precipitation) <span class="kw">as</span> total_precipitation
+<span class="kw">FROM</span> station_data
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span>
+<span class="kw">HAVING</span> total_precipitation &gt; <span class="dv">30</span></code></pre></div>
+<p>Note that some platforms like Oracle do not support aliasing in GROUP BY and HAVING.</p>
+<p>Therefore you have to rewrite the entire expression each time</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>,
+<span class="fu">SUM</span>( precipitation) <span class="kw">as</span> total_precipitation
+<span class="kw">FROM</span> station_data
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span>
+<span class="kw">HAVING</span> <span class="fu">SUM</span>( precipitation) &gt; <span class="dv">30</span></code></pre></div>
+<h3 id="getting-distinct-values">5.14 Getting Distinct values</h3>
+<p>You can get DISTINCT values for one or more columns</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> station_number <span class="kw">FROM</span> station_data</code></pre></div>
+<p>You can also get distinct combinations of values for multiple columns</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> station_number, <span class="dt">year</span> <span class="kw">FROM</span> station_data</code></pre></div>
+<h1 id="section-vi---case-statements">Section VI - CASE Statements</h1>
+<h3 id="categorizing-wind-speed">6.1 Categorizing Wind Speed</h3>
+<p>You can use a <code>CASE</code> statement to turn a column value into another value based on conditions. For instance, we can turn different <code>wind_speed</code> ranges into <code>HIGH</code>, <code>MODERATE</code>, and <code>LOW</code> categories.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> report_code, <span class="dt">year</span>, <span class="dt">month</span>, <span class="dt">day</span>, wind_speed,
+
+<span class="kw">CASE</span>
+   <span class="kw">WHEN</span> wind_speed &gt; = <span class="dv">40</span> <span class="kw">THEN</span> <span class="st">&#39;HIGH&#39;</span>
+   <span class="kw">WHEN</span> wind_speed &gt; = <span class="dv">30</span> <span class="kw">AND</span> wind_speed &lt; <span class="dv">40</span> <span class="kw">THEN</span> <span class="st">&#39;MODERATE&#39;</span>
+   <span class="kw">ELSE</span> <span class="st">&#39;LOW&#39;</span> <span class="kw">END</span>
+<span class="kw">as</span> wind_severity
+
+<span class="kw">FROM</span> station_data</code></pre></div>
+<h3 id="more-efficient-way-to-categorize-wind-speed">6.2 More Efficient Way To Categorize Wind Speed</h3>
+<p>We can actually omit <code>AND wind_speed &lt; 40</code> from the previous example because each <code>WHEN</code>/<code>THEN</code> is evaluated from top-to-bottom. The first one it finds to be true is the one it will go with, and stop evaluating subsequent conditions.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> report_code, <span class="dt">year</span>, <span class="dt">month</span>, <span class="dt">day</span>, wind_speed,
+
+<span class="kw">CASE</span>
+   <span class="kw">WHEN</span> wind_speed &gt; = <span class="dv">40</span> <span class="kw">THEN</span> <span class="st">&#39;HIGH&#39;</span>
+   <span class="kw">WHEN</span> wind_speed &gt; = <span class="dv">30</span> <span class="kw">THEN</span> <span class="st">&#39;MODERATE&#39;</span>
+   <span class="kw">ELSE</span> <span class="st">&#39;LOW&#39;</span> <span class="kw">END</span>
+<span class="kw">as</span> wind_severity
+
+<span class="kw">FROM</span> station_data</code></pre></div>
+<h3 id="using-case-with-group-by">6.3 Using CASE with GROUP BY</h3>
+<p>We can use <code>GROUP BY</code> in conjunction with a <code>CASE</code> statement to slice data in more ways, such as getting the record count by <code>wind_severity</code> and <code>year</code>.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>,
+
+<span class="kw">CASE</span>
+   <span class="kw">WHEN</span> wind_speed &gt; = <span class="dv">40</span> <span class="kw">THEN</span> <span class="st">&#39;HIGH&#39;</span>
+   <span class="kw">WHEN</span> wind_speed &gt; = <span class="dv">30</span> <span class="kw">THEN</span> <span class="st">&#39;MODERATE&#39;</span>
+   <span class="kw">ELSE</span> <span class="st">&#39;LOW&#39;</span> <span class="kw">END</span>
+<span class="kw">as</span> wind_severity,
+
+<span class="fu">COUNT</span>(*) <span class="kw">as</span> record_count
+
+<span class="kw">FROM</span> station_data
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>,<span class="dv">2</span></code></pre></div>
+<h3 id="zeronull-case-trick">6.4 &quot;Zero/Null&quot; Case Trick</h3>
+<p>There is really no way to create multiple aggregations with different conditions unless you know a trick with the <code>CASE</code> statement. If you want to find two total precipitation, with and without tornado precipitations, for each year and month, you have to do separate queries.</p>
+<p><strong>Tornado Precipitation</strong></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>, <span class="dt">month</span>,
+<span class="fu">SUM</span>(precipitation) <span class="kw">as</span> tornado_precipitation
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado = <span class="dv">1</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span>, <span class="dt">month</span></code></pre></div>
+<p><strong>Non-Tornado Precipitation</strong></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>, <span class="dt">month</span>,
+<span class="fu">SUM</span>(precipitation) <span class="kw">as</span> non_tornado_precipitation
+<span class="kw">FROM</span> station_data
+<span class="kw">WHERE</span> tornado = <span class="dv">0</span>
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span>, <span class="dt">month</span></code></pre></div>
+<p>But you can use a single query using a <code>CASE</code> statement that sets a value to 0 if the condition is not met. That way it will not impact the sum.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>, <span class="dt">month</span>,
+<span class="fu">SUM</span>(<span class="kw">CASE</span> <span class="kw">WHEN</span> tornado = <span class="dv">1</span> <span class="kw">THEN</span> precipitation <span class="kw">ELSE</span> <span class="dv">0</span> <span class="kw">END</span>) <span class="kw">as</span> tornado_precipitation,
+
+<span class="fu">SUM</span>(<span class="kw">CASE</span> <span class="kw">WHEN</span> tornado = <span class="dv">0</span> <span class="kw">THEN</span> precipitation <span class="kw">ELSE</span> <span class="dv">0</span> <span class="kw">END</span>) <span class="kw">as</span> non_tornado_precipitation
+
+<span class="kw">FROM</span> station_data <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span>, <span class="dt">month</span></code></pre></div>
+<h3 id="using-null-in-a-case-to-conditionalize-minmax">6.5 Using Null in a CASE to conditionalize MIN/MAX</h3>
+<p>Since <code>NULL</code> is ignored in SUM, MIN, MAX, and other aggregate functions, you can use it in a <code>CASE</code> statement to conditionally control whether or not a value should be included in that aggregation.</p>
+<p>For instance, we can split up max precipitation when a tornado was present vs not present.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="dt">year</span>,
+<span class="fu">MAX</span>(<span class="kw">CASE</span> <span class="kw">WHEN</span> tornado = <span class="dv">0</span> <span class="kw">THEN</span> precipitation <span class="kw">ELSE</span> <span class="kw">NULL</span> <span class="kw">END</span>) <span class="kw">as</span> max_non_tornado_precipitation,
+<span class="fu">MAX</span>(<span class="kw">CASE</span> <span class="kw">WHEN</span> tornado = <span class="dv">1</span> <span class="kw">THEN</span> precipitation <span class="kw">ELSE</span> <span class="kw">NULL</span> <span class="kw">END</span>) <span class="kw">as</span> max_tornado_precipitation
+<span class="kw">FROM</span> station_data
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span></code></pre></div>
+<p><em>Switch to slides for exercise</em></p>
+<h3 id="exercise-6.1">Exercise 6.1</h3>
+<p>SELECT the report_code, year, quarter, and temperature, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively.</p>
+<p><strong>ANSWER:</strong></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span>
+
+report_code,
+<span class="dt">year</span>,
+
+<span class="kw">CASE</span>
+    <span class="kw">WHEN</span> <span class="dt">month</span> <span class="kw">BETWEEN</span> <span class="dv">1</span> <span class="kw">and</span> <span class="dv">3</span> <span class="kw">THEN</span> <span class="ot">&quot;Q1&quot;</span>
+    <span class="kw">WHEN</span> <span class="dt">month</span> <span class="kw">BETWEEN</span> <span class="dv">4</span> <span class="kw">and</span> <span class="dv">6</span> <span class="kw">THEN</span> <span class="ot">&quot;Q2&quot;</span>
+    <span class="kw">WHEN</span> <span class="dt">month</span> <span class="kw">BETWEEN</span> <span class="dv">7</span> <span class="kw">and</span> <span class="dv">9</span> <span class="kw">THEN</span> <span class="ot">&quot;Q3&quot;</span>
+    <span class="kw">WHEN</span> <span class="dt">month</span> <span class="kw">BETWEEN</span> <span class="dv">10</span> <span class="kw">and</span> <span class="dv">12</span> <span class="kw">THEN</span> <span class="ot">&quot;Q4&quot;</span>
+<span class="kw">END</span> <span class="kw">as</span> quarter,
+
+temperature
+
+<span class="kw">FROM</span> STATION_DATA</code></pre></div>
+<h3 id="exercise-6.2">Exercise 6.2</h3>
+<p>Get the average temperature by quarter and month, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively.</p>
+<p><strong>ANSWER</strong></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span>
+<span class="dt">year</span>,
+
+<span class="kw">CASE</span>
+    <span class="kw">WHEN</span> <span class="dt">month</span> <span class="kw">BETWEEN</span> <span class="dv">1</span> <span class="kw">and</span> <span class="dv">3</span> <span class="kw">THEN</span> <span class="ot">&quot;Q1&quot;</span>
+    <span class="kw">WHEN</span> <span class="dt">month</span> <span class="kw">BETWEEN</span> <span class="dv">4</span> <span class="kw">and</span> <span class="dv">6</span> <span class="kw">THEN</span> <span class="ot">&quot;Q2&quot;</span>
+    <span class="kw">WHEN</span> <span class="dt">month</span> <span class="kw">BETWEEN</span> <span class="dv">7</span> <span class="kw">and</span> <span class="dv">9</span> <span class="kw">THEN</span> <span class="ot">&quot;Q3&quot;</span>
+    <span class="kw">WHEN</span> <span class="dt">month</span> <span class="kw">BETWEEN</span> <span class="dv">10</span> <span class="kw">and</span> <span class="dv">12</span> <span class="kw">THEN</span> <span class="ot">&quot;Q4&quot;</span>
+<span class="kw">END</span> <span class="kw">as</span> quarter,
+
+<span class="fu">AVG</span>(temperature) <span class="kw">as</span> avg_temp
+
+<span class="kw">FROM</span> STATION_DATA
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>,<span class="dv">2</span></code></pre></div>
+<h1 id="section-vii---join">Section VII - JOIN</h1>
+<h3 id="inner-join">7.1 INNER JOIN</h3>
+<p>(Refer to slides Section VII)</p>
+<p>View customer address information with each order by joining tables <code>CUSTOMER</code> and <code>CUSTOMER_ORDER</code>.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> ORDER_ID,
+CUSTOMER.CUSTOMER_ID,
+ORDER_DATE,
+SHIP_DATE,
+NAME,
+STREET_ADDRESS,
+CITY,
+STATE,
+ZIP,
+PRODUCT_ID,
+ORDER_QTY
+
+<span class="kw">FROM</span> CUSTOMER <span class="kw">INNER</span> <span class="kw">JOIN</span> CUSTOMER_ORDER
+<span class="kw">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID</code></pre></div>
+<p>Joins allow us to keep stored data normalized and simple, but we can get more descriptive views of our data by using joins.</p>
+<p>Notice how two customers are omitted since they don't have any orders (refer to slides).</p>
+<h3 id="left-outer-join">7.2 LEFT OUTER JOIN</h3>
+<p>To include all customers, regardless of whether they have orders, you can use a left outer join via <code>LEFT JOIN</code> (refer to slides).</p>
+<p>If any customers do not have any orders, they will get one record where the <code>CUSTOMER_ORDER</code> fields will be null.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> CUSTOMER.CUSTOMER_ID,
+NAME,
+STREET_ADDRESS,
+CITY,
+STATE,
+ZIP,
+ORDER_DATE,
+SHIP_DATE,
+ORDER_ID,
+PRODUCT_ID,
+ORDER_QTY
+
+<span class="kw">FROM</span> CUSTOMER <span class="kw">LEFT</span> <span class="kw">JOIN</span> CUSTOMER_ORDER
+<span class="kw">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID</code></pre></div>
+<h2 id="finding-customers-with-no-orders">7.3 Finding Customers with No Orders</h2>
+<p>With a left outer join, you can filter for NULL values on the <code>CUSTOMER_ORDER</code> table to find customers that have no orders.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> CUSTOMER.CUSTOMER_ID,
+NAME <span class="kw">AS</span> CUSTOMER_NAME
+
+<span class="kw">FROM</span> CUSTOMER <span class="kw">LEFT</span> <span class="kw">JOIN</span> CUSTOMER_ORDER
+<span class="kw">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="kw">WHERE</span> ORDER_ID <span class="kw">IS</span> <span class="kw">NULL</span></code></pre></div>
+<p>You can use a left outer join to find child records with no parent, or parent records with no children (e.g. a <code>CUSTOMER_ORDER</code> with no <code>CUSTOMER</code>, or a <code>CUSTOMER</code> with no <code>CUSTOMER_ORDER</code>s).</p>
+<h2 id="joining-multiple-tables">7.4 Joining Multiple Tables</h2>
+<p>Bring in <code>PRODUCT</code> to supply product information for each <code>CUSTOMER_ORDER</code>, on top of <code>CUSTOMER</code> information.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> ORDER_ID,
+CUSTOMER.CUSTOMER_ID,
+NAME <span class="kw">AS</span> CUSTOMER_NAME,
+STREET_ADDRESS,
+CITY,
+STATE,
+ZIP,
+ORDER_DATE,
+PRODUCT_ID,
+DESCRIPTION,
+ORDER_QTY
+
+<span class="kw">FROM</span> CUSTOMER <span class="kw">INNER</span> <span class="kw">JOIN</span> CUSTOMER_ORDER
+<span class="kw">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="kw">INNER</span> <span class="kw">JOIN</span> PRODUCT
+<span class="kw">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID</code></pre></div>
+<h2 id="using-expressions-with-joins">7.7 Using Expressions with JOINs</h2>
+<p>You can use expressions combining any fields on any of the joined tables. For instance, we can now get the total revenue for each customer.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> ORDER_ID,
+CUSTOMER.CUSTOMER_ID,
+NAME <span class="kw">AS</span> CUSTOMER_NAME,
+STREET_ADDRESS,
+CITY,
+STATE,
+ZIP,
+ORDER_DATE,
+PRODUCT_ID,
+DESCRIPTION,
+ORDER_QTY,
+ORDER_QTY * PRICE <span class="kw">as</span> REVENUE
+
+<span class="kw">FROM</span> CUSTOMER <span class="kw">INNER</span> <span class="kw">JOIN</span> CUSTOMER_ORDER
+<span class="kw">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="kw">INNER</span> <span class="kw">JOIN</span> PRODUCT
+<span class="kw">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID</code></pre></div>
+<h2 id="using-group-by-with-joins">7.6 Using GROUP BY with JOINs</h2>
+<p>You can use <code>GROUP BY</code> with a join. For instance, you can find the total revenue for each customer by leveraging all three joined tables, and aggregating the <code>REVENUE</code> expression we created earlier.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span>
+CUSTOMER.CUSTOMER_ID,
+NAME <span class="kw">AS</span> CUSTOMER_NAME,
+<span class="fu">sum</span>(ORDER_QTY * PRICE) <span class="kw">as</span> TOTAL_REVENUE
+
+<span class="kw">FROM</span> CUSTOMER <span class="kw">INNER</span> <span class="kw">JOIN</span> CUSTOMER_ORDER
+<span class="kw">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="kw">INNER</span> <span class="kw">JOIN</span> PRODUCT
+<span class="kw">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID
+
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>,<span class="dv">2</span></code></pre></div>
+<p>To see all customers even if they had no orders, use a <code>LEFT JOIN</code></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span>
+CUSTOMER.CUSTOMER_ID,
+NAME <span class="kw">AS</span> CUSTOMER_NAME,
+<span class="fu">sum</span>(ORDER_QTY * PRICE) <span class="kw">as</span> TOTAL_REVENUE
+
+<span class="kw">FROM</span> CUSTOMER <span class="kw">LEFT</span> <span class="kw">JOIN</span> CUSTOMER_ORDER
+<span class="kw">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="kw">LEFT</span> <span class="kw">JOIN</span> PRODUCT
+<span class="kw">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID
+
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>,<span class="dv">2</span></code></pre></div>
+<p>You can also use a <code>coalesce()</code> function to turn null sums into zeros.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span>
+CUSTOMER.CUSTOMER_ID,
+NAME <span class="kw">AS</span> CUSTOMER_NAME,
+<span class="kw">coalesce</span>(<span class="fu">sum</span>(ORDER_QTY * PRICE), <span class="dv">0</span>) <span class="kw">as</span> TOTAL_REVENUE
+
+<span class="kw">FROM</span> CUSTOMER <span class="kw">LEFT</span> <span class="kw">JOIN</span> CUSTOMER_ORDER
+<span class="kw">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="kw">LEFT</span> <span class="kw">JOIN</span> PRODUCT
+<span class="kw">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID
+
+<span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>,<span class="dv">2</span></code></pre></div>
+<h1 id="section-viii---database-design">Section VIII - Database Design</h1>
+<p>Refer to slides for database design concepts</p>
+<p>To view source code for SQL Injection Demo, here is the GitHub page: https://github.com/thomasnield/sql-injection-demo</p>
+<h2 id="creating-a-table">7.1 - Creating a Table</h2>
+<p>In SQLiteStudio, navigate to <em>Database</em> -&gt; <em>Add a Database</em> and click the green plus icon to create a new database. Choose a location and name it <code>surgetech_conference.db</code>.</p>
+<p>Create the <code>COMPANY</code> table. To create a new table, use the SQLiteStudio wizard by right-clicking the <code>surgetech_conference</code> database and selecting <code>Create a table</code>. You can also just execute the following SQL.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">TABLE</span> COMPANY (
+  COMPANY_ID <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTOINCREMENT,
+  NAME <span class="dt">VARCHAR</span>(<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  DESCRIPTION <span class="dt">VARCHAR</span>(<span class="dv">60</span>),
+  PRIMARY_CONTACT_ATTENDEE_ID <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (PRIMARY_CONTACT_ATTENDEE_ID) <span class="kw">REFERENCES</span> ATTENDEE(ATTENDEE_ID)
+);</code></pre></div>
+<p>After each field declaration, we create &quot;rules&quot; for that field. For example, <code>COMPANY_ID</code> must be an <code>INTEGER</code>, it is a <code>PRIMARY KEY</code>, and it will <code>AUTOINCREMENT</code> to automatically generate a consecutive integer ID for each new record. The <code>NAME</code> field holds text because it is <code>VARCHAR</code> (a variable number of characters), and it is limited to 30 characters and cannot be <code>NULL</code>.</p>
+<p>Lastly, we declare any <code>FOREIGN KEY</code> constraints, specifying which field is a <code>FOREIGN KEY</code> and what <code>PRIMARY KEY</code> it references. In this example, <code>PRIMARY_CONTACT_ID</code> &quot;references&quot; the <code>ATTENDEE_ID</code> in the <code>ATTENDEE</code> table, and it can only be those values.</p>
+<h2 id="creating-the-other-tables">7.2 - Creating the other tables</h2>
+<p>Create the other tables using the SQLiteStudio <em>New table</em> wizard, or just executing the following SQL code.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">TABLE</span> ROOM (
+  ROOM_ID <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTOINCREMENT,
+  FLOOR_NUMBER <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  SEAT_CAPACITY <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>
+);
+
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> PRESENTATION (
+  PRESENTATION_ID <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTOINCREMENT,
+  BOOKED_COMPANY_ID <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  BOOKED_ROOM_ID <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  START_TIME <span class="dt">TIME</span>,
+  END_TIME <span class="dt">TIME</span>,
+  <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (BOOKED_COMPANY_ID) <span class="kw">REFERENCES</span> COMPANY(COMPANY_ID)
+  <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (BOOKED_ROOM_ID) <span class="kw">REFERENCES</span> ROOM(ROOM_ID)
+);
+
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> ATTENDEE (
+   ATTENDEE_ID <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTOINCREMENT,
+   FIRST_NAME <span class="dt">VARCHAR</span> (<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+   LAST_NAME <span class="dt">VARCHAR</span> (<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+   PHONE <span class="dt">INTEGER</span>,
+   EMAIL <span class="dt">VARCHAR</span> (<span class="dv">30</span>),
+   VIP <span class="dt">BOOLEAN</span> <span class="kw">DEFAULT</span> (<span class="dv">0</span>)
+);
+
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> PRESENTATION_ATTENDANCE (
+  TICKET_ID <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTOINCREMENT,
+  PRESENTATION_ID <span class="dt">INTEGER</span>,
+  ATTENDEE_ID <span class="dt">INTEGER</span>,
+  <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (PRESENTATION_ID) <span class="kw">REFERENCES</span> PRESENTATION(PRESENTATION_ID)
+  <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (ATTENDEE_ID) <span class="kw">REFERENCES</span> ATTENDEE(ATTENDEE_ID)
+);</code></pre></div>
+<h2 id="creating-the-foreign-keys">7.3 - Creating the Foreign Keys</h2>
+<p>When you execute the SQL above it will take care of the foreign keys, you will need to add them manually. We need to establish our foreign keys and tie them to the primary keys. This way no child records cannot be added if they do not have an existing parent.</p>
+<p>To use the SQLiteStudio UI to create the foreign keys without SQL, right-click the table in SQLiteStudio, then click <em>Edit the table</em>, then double click the field you want to make a foreign key. Then check <em>Foreign Key</em> and then <em>Configure</em>. You will then be able to specify the primary key it should be tied to. Establish the following primary/foreign key setups using these steps:</p>
+<table style="width:11%;">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Create foreign key for [Table].[Field]</th>
+<th>Off parent primary key [Table].[Field]</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PRESENTATION.BOOKED_COMPANY_ID</td>
+<td>COMPANY.COMPANY_ID</td>
+</tr>
+<tr class="even">
+<td>PRESENTATION.BOOKED_ROOM_ID</td>
+<td>ROOM.ROOM_ID</td>
+</tr>
+<tr class="odd">
+<td>PRESENTATION_ATTENDANCE.PRESENTATION_ID</td>
+<td>PRESENTATION.PRESENTATION_ID</td>
+</tr>
+<tr class="even">
+<td>PRESENTATION_ATTENDANCE.ATTENDEE_ID</td>
+<td>ATTENDEE.ATTENDEE_ID</td>
+</tr>
+<tr class="odd">
+<td>COMPANY.PRIMARY_CONTACT_ID</td>
+<td>ATTENDEE.ATTENDEE_ID</td>
+</tr>
+</tbody>
+</table>
+<p>For instance, we can never insert a <code>PRESENTATION</code> record where a <code>BOOKED_ROOM_ID</code> does not exist as a <code>ROOM_ID</code> value in the <code>ROOM</code> table. We will see this in action in the next section when we <code>INSERT</code> records.</p>
+<h2 id="creating-views">Creating Views</h2>
+<p>It is not uncommon to save <code>SELECT</code> queries that are used frequently into a database. These are known as <strong>Views</strong> and act very similarly to tables. You can essentially save a <code>SELECT</code> query and work with it just like a table.</p>
+<p>For instance, say we wanted to save this SQL query that includes <code>ROOM</code> and <code>COMPANY</code> info with each <code>PRESENTATION</code> record.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> COMPANY.NAME <span class="kw">as</span> BOOKED_COMPANY,
+ROOM.ROOM_ID <span class="kw">as</span> ROOM_NUMBER,
+ROOM.FLOOR_NUMBER <span class="kw">as</span> <span class="fu">FLOOR</span>,
+ROOM.SEAT_CAPACITY <span class="kw">as</span> SEATS,
+START_TIME, END_TIME
+
+<span class="kw">FROM</span> PRESENTATION        
+
+<span class="kw">INNER</span> <span class="kw">JOIN</span> COMPANY
+<span class="kw">ON</span> PRESENTATION.BOOKED_COMPANY_ID = COMPANY.COMPANY_ID
+
+<span class="kw">INNER</span> <span class="kw">JOIN</span> ROOM
+<span class="kw">ON</span> PRESENTATION.BOOKED_ROOM_ID = ROOM.ROOM_ID</code></pre></div>
+<p>You can save this as a view by right-clicking <em>Views</em> in the database navigator, and then <em>Create a view</em>. You can then paste the SQL as the body and give the view a name, such as <code>PRESENTATION_VW</code> (where &quot;VW&quot; means &quot;View&quot;).</p>
+<p>You can also just execute the following SQL syntax: <code>CREATE [view name]  AS [a SELECT query]</code>. For this example, this is what it would look like.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">VIEW</span> PRESENTATION_VW <span class="kw">AS</span>
+
+<span class="kw">SELECT</span> COMPANY.NAME <span class="kw">as</span> BOOKED_COMPANY,
+ROOM.ROOM_ID <span class="kw">as</span> ROOM_NUMBER,
+ROOM.FLOOR_NUMBER <span class="kw">as</span> <span class="fu">FLOOR</span>,
+ROOM.SEAT_CAPACITY <span class="kw">as</span> SEATS,
+START_TIME, END_TIME
+
+<span class="kw">FROM</span> PRESENTATION        
+
+<span class="kw">INNER</span> <span class="kw">JOIN</span> COMPANY
+<span class="kw">ON</span> PRESENTATION.BOOKED_COMPANY_ID = COMPANY.COMPANY_ID
+
+<span class="kw">INNER</span> <span class="kw">JOIN</span> ROOM
+<span class="kw">ON</span> PRESENTATION.BOOKED_ROOM_ID = ROOM.ROOM_ID</code></pre></div>
+<p>You will then see the <code>PRESENTATION_VW</code> in your database navigator, and you can query it just like a table.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> PRESENTATION_VW
+<span class="kw">WHERE</span> SEATS &gt; = <span class="dv">30</span></code></pre></div>
+<p>Obviously, there is no data yet so you will not get any results. But there will be once you populate data into this database.</p>
+<h1 id="section-ix---writing-data">Section IX - Writing Data</h1>
+<p>In this section, we will learn how to write, modify, and delete data in a database.</p>
+<h2 id="using-insert">9.1 Using <code>INSERT</code></h2>
+<p>To create a new record in a table, use the <code>INSERT</code> command and supply the values for the needed columns.</p>
+<p>Put yourself into the <code>ATTENDEE</code> table.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">INSERT</span> <span class="kw">INTO</span> ATTENDEE (FIRST_NAME, LAST_NAME)
+<span class="kw">VALUES</span> (<span class="st">&#39;Thomas&#39;</span>,<span class="st">&#39;Nield&#39;</span>)</code></pre></div>
+<p>Notice above that we declare the table we are writing to, which is <code>ATTENDEE</code>. Then we declare the columns we are supplying values for <code>(FIRST_NAME, LAST_NAME)</code>, followed by the values for this new record <code>('Thomas','Nield')</code>.</p>
+<p>Notice we did not have to supply a value for <code>ATTENDEE_ID</code> as we have set it in the previous section to generate its own value. <code>PHONE</code>, <code>EMAIL</code>, and <code>VIP</code> fields have default values or are nullable, and therefore optional.</p>
+<h2 id="multiple-insert-records">9.2 Multiple <code>INSERT</code> records</h2>
+<p>You can insert multiple rows in an <code>INSERT</code>. This will add three people to the <code>ATTENDEE</code> table.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">INSERT</span> <span class="kw">INTO</span> ATTENDEE (FIRST_NAME, LAST_NAME, PHONE, EMAIL, VIP)
+<span class="kw">VALUES</span> (<span class="st">&#39;Jon&#39;</span>, <span class="st">&#39;Skeeter&#39;</span>, <span class="dv">4802185842</span>,<span class="st">&#39;john.skeeter@ rex.net&#39;</span>, <span class="dv">1</span>),
+  (<span class="st">&#39;Sam&#39;</span>,<span class="st">&#39;Scala&#39;</span>, <span class="dv">2156783401</span>,<span class="st">&#39;sam.scala@ gmail.com&#39;</span>, <span class="dv">0</span>),
+  (<span class="st">&#39;Brittany&#39;</span>,<span class="st">&#39;Fisher&#39;</span>, <span class="dv">5932857296</span>,<span class="st">&#39;brittany.fisher@ outlook.com&#39;</span>, <span class="dv">0</span>)</code></pre></div>
+<h2 id="testing-the-foreign-keys">9.3 Testing the foreign keys</h2>
+<p>Let's test our design and make sure our primary/foreign keys are working.</p>
+<p>Try to <code>INSERT</code> a <code>COMPANY</code> with a <code>PRIMARY_CONTACT_ID</code> that does not exist in the <code>ATTENDEE</code> table.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">INSERT</span> <span class="kw">INTO</span> COMPANY (NAME, DESCRIPTION, PRIMARY_CONTACT_ID)
+<span class="kw">VALUES</span> (<span class="st">&#39;RexApp Solutions&#39;</span>,<span class="st">&#39;A mobile app delivery service&#39;</span>, <span class="dv">5</span>)</code></pre></div>
+<p>Currently, there is no <code>ATTENDEE</code> with an <code>ATTENDEE_ID</code> of 5, this should error out which is good. It means we kept bad data out.</p>
+<p>If you use an <code>ATTENDEE_ID</code> value that does exist and supply it as a <code>PRIMARY_CONTACT_ID</code>, we should be good to go.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">INSERT</span> <span class="kw">INTO</span> COMPANY (NAME, DESCRIPTION, PRIMARY_CONTACT_ID)
+<span class="kw">VALUES</span> (<span class="st">&#39;RexApp Solutions&#39;</span>, <span class="st">&#39;A mobile app delivery service&#39;</span>, <span class="dv">3</span>)</code></pre></div>
+<h3 id="delete-records">9.3 <code>DELETE</code> records</h3>
+<p>The <code>DELETE</code> command is dangerously simple. To delete records from both the <code>COMPANY</code> and <code>ATTENDEE</code> tables, execute the following SQL commands.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">DELETE</span> <span class="kw">FROM</span> COMPANY;
+<span class="kw">DELETE</span> <span class="kw">FROM</span> ATTENDEE;</code></pre></div>
+<p>Note that the <code>COMPANY</code> table has a foreign key relationship with the <code>ATTENDEE</code> table. Therefore we will have to delete records from <code>COMPANY</code> first before it allows us to delete data from <code>ATTENDEE</code>. Otherwise we will get a &quot;FOREIGN KEY constraint failed effort&quot; due to the <code>COMPANY</code> record we just added which is tied to the <code>ATTENDEE</code> with the <code>ATTENDEE_ID</code> of 3.</p>
+<p>You can also use a <code>WHERE</code> to only delete records that meet a conditional. To delete all <code>ATTENDEE</code> records with no <code>PHONE</code> or <code>EMAIL</code>, you can run this command.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">DELETE</span> <span class="kw">FROM</span> ATTENDEE
+<span class="kw">WHERE</span> PHONE <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">AND</span> EMAIL <span class="kw">IS</span> <span class="kw">NULL</span></code></pre></div>
+<p>A good practice is to use a <code>SELECT *</code> in place of the <code>DELETE</code> first. That way you can get a preview of what records will be deleted with that <code>WHERE</code> condition.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ATTENDEE
+<span class="kw">WHERE</span> PHONE <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">AND</span> EMAIL <span class="kw">IS</span> <span class="kw">NULL</span></code></pre></div>
+<h3 id="update-records"><code>UPDATE</code> records</h3>
+<p>Say we wanted to change the phone number for the <code>ATTENDEE</code> with the <code>ATTENDEE_ID</code> value of 3, which is Sam Scala. We can do this with an <code>UPDATE</code> statement.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">UPDATE</span> ATTENDEE <span class="kw">SET</span> PHONE = <span class="dv">4802735872</span>
+<span class="kw">WHERE</span> ATTENDEE_ID = <span class="dv">3</span></code></pre></div>
+<p>Using a <code>WHERE</code> is important, otherwise it will update all records with the specified <code>SET</code> assignmnet. This can be handy if you wanted to say, make all <code>EMAIL</code> values uppercase.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">UPDATE</span> ATTENDEE <span class="kw">SET</span> EMAIL = <span class="fu">UPPER</span>(EMAIL)</code></pre></div>
+<h3 id="dropping-tables">9.4 Dropping Tables</h3>
+<p>If you want to delete a table, it also is dangerously simple. Be very careful and sure before you delete any table, because it will remove it permanently.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">DROP</span> <span class="kw">TABLE</span> MY_UNWANTED_TABLE</code></pre></div>
+<h3 id="creating-indexes">9.5 Creating Indexes</h3>
+<p>You can create an index on a certain column to speed up SELECT performance, such as the <code>price</code> column on the <code>PRODUCT</code> table.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">INDEX</span> price_index <span class="kw">ON</span> PRODUCT(price);</code></pre></div>
+<p>You can also create an index for a column that has unique values, and it will make a special optimization for that case.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">UNIQUE</span> <span class="kw">INDEX</span> name_index <span class="kw">ON</span> CUSTOMER(name);</code></pre></div>
+<p>To remove an index, use the <code>DROP</code> command.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">DROP</span> <span class="kw">INDEX</span> price_index;</code></pre></div>
+<h1 id="section-x---moving-forward">Section X - Moving Forward</h1>
+<h3 id="sql-resources">SQL Resources</h3>
+<p><a href="http://shop.oreilly.com/product/0636920044994.do">Getting Started with SQL (O'Reilly)</a> by Thomas Nield</p>
+<p><a href="http://shop.oreilly.com/product/9780596520847.do">Learning SQL (O'Reilly)</a> by Alan Beaulieu</p>
+<p><a href="http://shop.oreilly.com/product/9780596521196.do">Using SQLite (O'Reilly)</a> by Jay A. Kreibich</p>
+<h3 id="r-resources">R Resources</h3>
+<p><a href="https://www.bing.com/search?q=coursera+R&amp;pc=MOZI&amp;form=MOZLBR">R Programming (Coursera)</a></p>
+<p><a href="http://shop.oreilly.com/product/9781593273842.do">The Art of R Programming (No Starch)</a></p>
+<h3 id="python-resources">Python Resources</h3>
+<p><a href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python (No Starch)</a></p>
+<h3 id="qa-assistance">Q&amp;A Assistance</h3>
+<p><a href="http://stackoverflow.com/">Stack Overflow</a></p>
