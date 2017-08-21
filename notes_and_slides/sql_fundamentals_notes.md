@@ -75,6 +75,8 @@ FROM CUSTOMER;
 This works with any data types, like numbers, texts, and dates. Also note that some platforms use `concat()` function instead of double pipes `||`
 
 **SWITCH TO SLIDES** FOR EXERCISE
+
+
 ## Section IV- WHERE
 
 ### 4.1: Getting year 2010 records
