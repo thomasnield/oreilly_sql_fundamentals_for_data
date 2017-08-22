@@ -828,24 +828,7 @@ CREATE TABLE PRESENTATION_ATTENDANCE (
   FOREIGN KEY (PRESENTATION_ID) REFERENCES PRESENTATION(PRESENTATION_ID)
   FOREIGN KEY (ATTENDEE_ID) REFERENCES ATTENDEE(ATTENDEE_ID)
 );
-
 ```
-
-## 7.3 - Creating the Foreign Keys
-
-When you execute the SQL above it will take care of the foreign keys, you will need to add them manually. We need to establish our foreign keys and tie them to the primary keys. This way no child records cannot be added if they do not have an existing parent.
-
-To use the SQLiteStudio UI to create the foreign keys without SQL, right-click the table in SQLiteStudio, then click *Edit the table*, then double click the field you want to make a foreign key. Then check *Foreign Key* and then *Configure*. You will then be able to specify the primary key it should be tied to. Establish the following primary/foreign key setups using these steps:
-
-|Create foreign key for [Table].[Field]|Off parent primary key [Table].[Field]|
-|---|---|
-|PRESENTATION.BOOKED_COMPANY_ID|COMPANY.COMPANY_ID|
-|PRESENTATION.BOOKED_ROOM_ID|ROOM.ROOM_ID|
-|PRESENTATION_ATTENDANCE.PRESENTATION_ID|PRESENTATION.PRESENTATION_ID|
-|PRESENTATION_ATTENDANCE.ATTENDEE_ID|ATTENDEE.ATTENDEE_ID|
-|COMPANY.PRIMARY_CONTACT_ID|ATTENDEE.ATTENDEE_ID|
-
-For instance, we can never insert a `PRESENTATION` record where a `BOOKED_ROOM_ID` does not exist as a `ROOM_ID` value in the `ROOM` table. We will see this in action in the next section when we `INSERT` records.
 
 ## Creating Views
 
@@ -939,7 +922,7 @@ Let's test our design and make sure our primary/foreign keys are working.
 Try to `INSERT` a `COMPANY` with a `PRIMARY_CONTACT_ID` that does not exist in the `ATTENDEE` table.
 
 ```sql
-INSERT INTO COMPANY (NAME, DESCRIPTION, PRIMARY_CONTACT_ID)
+INSERT INTO COMPANY (NAME, DESCRIPTION, PRIMARY_CONTACT_ATTENDEE_ID)
 VALUES ('RexApp Solutions','A mobile app delivery service', 5)
 ```
 
