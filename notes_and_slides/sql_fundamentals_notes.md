@@ -60,7 +60,7 @@ You can merge text via concatenation. For instance, you can concatenate two fiel
 
 ```sql
 SELECT NAME,
-CITY | | ', ' | | STATE AS LOCATION
+CITY || ', ' || STATE AS LOCATION
 FROM CUSTOMER;
 ```
 
@@ -68,7 +68,7 @@ You can concatenate several fields to create an address.
 
 ```sql
 SELECT NAME,
-STREET_ADDRESS | | ' ' | | CITY | | ', ' | | STATE | | ' ' | | ZIP AS SHIP_ADDRESS
+STREET_ADDRESS || ' ' || CITY || ', ' || STATE || ' ' || ZIP AS SHIP_ADDRESS
 FROM CUSTOMER;
 ```
 
@@ -165,7 +165,7 @@ WHERE report_code = '513A63'
 
 ```sql
 SELECT * FROM station_data
-WHERE report_code IN ('513A63',' 1F8A7B',' EF616A')
+WHERE report_code IN ('513A63','1F8A7B','EF616A')
 ```
 
 ### 4.12: Using `length()` function
@@ -439,6 +439,7 @@ You can also get distinct combinations of values for multiple columns
 ```sql
 SELECT DISTINCT station_number, year FROM station_data
 ```
+
 # Section VI - CASE Statements
 
 ### 6.1 Categorizing Wind Speed
@@ -449,8 +450,8 @@ You can use a `CASE` statement to turn a column value into another value based o
 SELECT report_code, year, month, day, wind_speed,
 
 CASE
-   WHEN wind_speed > = 40 THEN 'HIGH'
-   WHEN wind_speed > = 30 AND wind_speed < 40 THEN 'MODERATE'
+   WHEN wind_speed >= 40 THEN 'HIGH'
+   WHEN wind_speed >= 30 AND wind_speed < 40 THEN 'MODERATE'
    ELSE 'LOW' END
 as wind_severity
 
@@ -674,7 +675,7 @@ CITY,
 STATE,
 ZIP,
 ORDER_DATE,
-PRODUCT_ID,
+PRODUCT.PRODUCT_ID,
 DESCRIPTION,
 ORDER_QTY
 
@@ -865,7 +866,7 @@ ROOM.FLOOR_NUMBER as FLOOR,
 ROOM.SEAT_CAPACITY as SEATS,
 START_TIME, END_TIME
 
-FROM PRESENTATION        
+FROM PRESENTATION
 
 INNER JOIN COMPANY
 ON PRESENTATION.BOOKED_COMPANY_ID = COMPANY.COMPANY_ID
@@ -919,7 +920,7 @@ VALUES ('Jon', 'Skeeter', 4802185842,'john.skeeter@ rex.net', 1),
 
 Let's test our design and make sure our primary/foreign keys are working.
 
-Try to `INSERT` a `COMPANY` with a `PRIMARY_CONTACT_ID` that does not exist in the `ATTENDEE` table.
+Try to `INSERT` a `COMPANY` with a `PRIMARY_CONTACT_ATTENDEE_ID` that does not exist in the `ATTENDEE` table.
 
 ```sql
 INSERT INTO COMPANY (NAME, DESCRIPTION, PRIMARY_CONTACT_ATTENDEE_ID)
@@ -970,7 +971,7 @@ UPDATE ATTENDEE SET PHONE = 4802735872
 WHERE ATTENDEE_ID = 3
 ```
 
-Using a `WHERE` is important, otherwise it will update all records with the specified `SET` assignmnet. This can be handy if you wanted to say, make all `EMAIL` values uppercase.
+Using a `WHERE` is important, otherwise it will update all records with the specified `SET` assignment. This can be handy if you wanted to say, make all `EMAIL` values uppercase.
 
 ```sql
 UPDATE ATTENDEE SET EMAIL = UPPER(EMAIL)
