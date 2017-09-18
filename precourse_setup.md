@@ -16,7 +16,7 @@ After the download, **copy** the contents to a location your choice (or Applicat
 
 ![](http://i.imgur.com/nrzze4p.png)
 
-The database files can be retrieved from GitHub [here](https://github.com/thomasnield/oreilly_getting_started_with_sql). Click the `Clone or Download` button, and then `Download ZIP` to download all the databases in a zipped folder (Figure 2).
+The database files can be retrieved from GitHub [here](https://github.com/thomasnield/oreilly_sql_fundamentals_for_data). Click the `Clone or Download` button, and then `Download ZIP` to download all the databases in a zipped folder (Figure 2).
 
 **Figure 2 - Saving the database files**
 
