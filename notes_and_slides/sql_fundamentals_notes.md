@@ -466,8 +466,8 @@ We can actually omit `AND wind_speed < 40` from the previous example because eac
 SELECT report_code, year, month, day, wind_speed,
 
 CASE
-   WHEN wind_speed > = 40 THEN 'HIGH'
-   WHEN wind_speed > = 30 THEN 'MODERATE'
+   WHEN wind_speed >= 40 THEN 'HIGH'
+   WHEN wind_speed >= 30 THEN 'MODERATE'
    ELSE 'LOW' END
 as wind_severity
 
@@ -482,8 +482,8 @@ We can use `GROUP BY` in conjunction with a `CASE` statement to slice data in mo
 SELECT year,
 
 CASE
-   WHEN wind_speed > = 40 THEN 'HIGH'
-   WHEN wind_speed > = 30 THEN 'MODERATE'
+   WHEN wind_speed >= 40 THEN 'HIGH'
+   WHEN wind_speed >= 30 THEN 'MODERATE'
    ELSE 'LOW' END
 as wind_severity,
 
@@ -879,7 +879,7 @@ You will then see the `PRESENTATION_VW` in your database navigator, and you can 
 
 ```sql
 SELECT * FROM PRESENTATION_VW
-WHERE SEATS > = 30
+WHERE SEATS >= 30
 ```
 
 Obviously, there is no data yet so you will not get any results. But there will be once you populate data into this database.
@@ -985,7 +985,40 @@ If you want to delete a table, it also is dangerously simple. Be very careful an
 DROP TABLE MY_UNWANTED_TABLE
 ```
 
-### 9.5 Creating Indexes
+### 9.5 Transactions
+
+Transactions are helpful when you want a series of writes to succeed.
+
+
+Below, we execute two successful write operations within a transaction.
+
+```sql
+BEGIN TRANSACTION;
+
+INSERT INTO ROOM (FLOOR_NUMBER, SEAT_CAPACITY) VALUES (9, 80);
+INSERT INTO ROOM (FLOOR_NUMBER, SEAT_CAPACITY) VALUES (10, 110);
+
+END TRANSACTION;
+```
+
+But if we ever encountered a failure with our write operations, we can call `ROLLBACK` instead of `END TRANSACTION` to go back to the database state when `BEGIN TRANSACTION` was called.
+
+Below, we have a failed operation due to a broken `INSERT`.
+
+```sql
+BEGIN TRANSACTION;
+
+INSERT INTO ROOM (FLOOR_NUMBER, SEAT_CAPACITY) VALUES (12, 210);
+INSERT INTO ROOM (FLOOR_NUMBER, SEAT_CAPACITY) VALUES (13); --failure
+```
+
+So we can call `ROLLBACK` to "rewind" to the database state when `BEGIN TRANSACTION` was called.
+
+```sql
+ROLLBACK;
+```
+
+### 9.6 Creating Indexes
 
 You can create an index on a certain column to speed up SELECT performance, such as the `price` column on the `PRODUCT` table.
 
