@@ -790,7 +790,7 @@ CREATE TABLE COMPANY (
 
 After each field declaration, we create "rules" for that field. For example, `COMPANY_ID` must be an `INTEGER`, it is a `PRIMARY KEY`, and it will `AUTOINCREMENT` to automatically generate a consecutive integer ID for each new record. The `NAME` field holds text because it is `VARCHAR` (a variable number of characters), and it is limited to 30 characters and cannot be `NULL`.
 
-Lastly, we declare any `FOREIGN KEY` constraints, specifying which field is a `FOREIGN KEY` and what `PRIMARY KEY` it references. In this example, `PRIMARY_CONTACT_ID` "references" the `ATTENDEE_ID` in the `ATTENDEE` table, and it can only be those values.
+Lastly, we declare any `FOREIGN KEY` constraints, specifying which field is a `FOREIGN KEY` and what `PRIMARY KEY` it references. In this example, `PRIMARY_CONTACT_ATTENDEE_ID` "references" the `ATTENDEE_ID` in the `ATTENDEE` table, and it can only be those values.
 
 ## 7.2 - Creating the other tables
 
@@ -911,9 +911,9 @@ You can insert multiple rows in an `INSERT`. This will add three people to the `
 
 ```sql
 INSERT INTO ATTENDEE (FIRST_NAME, LAST_NAME, PHONE, EMAIL, VIP)
-VALUES ('Jon', 'Skeeter', 4802185842,'john.skeeter@ rex.net', 1),
-  ('Sam','Scala', 2156783401,'sam.scala@ gmail.com', 0),
-  ('Brittany','Fisher', 5932857296,'brittany.fisher@ outlook.com', 0)
+VALUES ('Jon', 'Skeeter', 4802185842,'john.skeeter@rex.net', 1),
+  ('Sam','Scala', 2156783401,'sam.scala@gmail.com', 0),
+  ('Brittany','Fisher', 5932857296,'brittany.fisher@outlook.com', 0)
 ```
 
 ## 9.3 Testing the foreign keys
@@ -929,10 +929,10 @@ VALUES ('RexApp Solutions','A mobile app delivery service', 5)
 
 Currently, there is no `ATTENDEE` with an `ATTENDEE_ID` of 5, this should error out which is good. It means we kept bad data out.
 
-If you use an `ATTENDEE_ID` value that does exist and supply it as a `PRIMARY_CONTACT_ID`, we should be good to go.
+If you use an `ATTENDEE_ID` value that does exist and supply it as a `PRIMARY_CONTACT_ATTENDEE_ID`, we should be good to go.
 
 ```sql
-INSERT INTO COMPANY (NAME, DESCRIPTION, PRIMARY_CONTACT_ID)
+INSERT INTO COMPANY (NAME, DESCRIPTION, PRIMARY_CONTACT_ATTENDEE_ID)
 VALUES ('RexApp Solutions', 'A mobile app delivery service', 3)
 ```
 
