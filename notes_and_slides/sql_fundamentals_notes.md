@@ -407,7 +407,7 @@ You can however, use HAVING.
 
 ```sql
 SELECT year,
-SUM( precipitation) as total_precipitation
+SUM(precipitation) as total_precipitation
 FROM station_data
 GROUP BY year
 HAVING total_precipitation > 30
@@ -419,10 +419,10 @@ Therefore you have to rewrite the entire expression each time
 
 ```sql
 SELECT year,
-SUM( precipitation) as total_precipitation
+SUM(precipitation) as total_precipitation
 FROM station_data
 GROUP BY year
-HAVING SUM( precipitation) > 30
+HAVING SUM(precipitation) > 30
 ```
 
 
