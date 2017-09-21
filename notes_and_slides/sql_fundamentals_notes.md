@@ -772,6 +772,11 @@ To view source code for SQL Injection Demo, here is the GitHub page:
 https://github.com/thomasnield/sql-injection-demo
 
 
+To read about normalized forms (which we do not cover in favor of a more intuitive approach), you can read this article:
+
+http://www.dummies.com/programming/sql/sql-first-second-and-third-normal-forms/
+
+
 ## 7.1 - Creating a Table
 
 In SQLiteStudio, navigate to *Database* -> *Add a Database* and click the green plus icon to create a new database. Choose a location and name it `surgetech_conference.db`.
@@ -1048,19 +1053,4 @@ DROP INDEX price_index;
 
 [Using SQLite (O'Reilly)](http://shop.oreilly.com/product/9780596521196.do) by Jay A. Kreibich
 
-
-### R Resources
-
-[R Programming (Coursera)](https://www.bing.com/search?q=coursera+R&pc=MOZI&form=MOZLBR)
-
-[The Art of R Programming (No Starch)](http://shop.oreilly.com/product/9781593273842.do)
-
-
-### Python Resources
-
-[Automate the Boring Stuff with Python (No Starch)](https://automatetheboringstuff.com/)
-
-
-### Q&A Assistance
-
-[Stack Overflow](http://stackoverflow.com/)
+[SQL Practice Problems](https://www.amazon.com/SQL-Practice-Problems-learn-doing/dp/1520807635/) by Sylvia Moestl Vasilik
