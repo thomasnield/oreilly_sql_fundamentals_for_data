@@ -7,6 +7,13 @@
 SELECT * FROM CUSTOMER;
 ```
 
+
+To limit the number of records returned, use a LIMIT. To limit the results to just 2 records:
+
+```sql
+SELECT * FROM CUSTOMER LIMIT 2;
+```
+
 ### 3.2: Selecting specific columns
 
 ```sql
@@ -41,6 +48,8 @@ PRICE * 1.07 AS TAXED_PRICE
 FROM PRODUCT;
 ```
 
+**SWITCH TO SLIDES** FOR MATHEMATICAL OPERATORS
+
 ### 3.4: Using `round()` Function
 
 ```sql
@@ -51,8 +60,6 @@ round(PRICE * 1.07, 2) AS TAXED_PRICE
 
 FROM PRODUCT;
 ```
-
-**SWITCH TO SLIDES** FOR MATHEMATICAL OPERATORS
 
 ### 3.5: Text Concatenation
 
@@ -102,14 +109,14 @@ WHERE year <> 2010;
 
 ```sql
 SELECT * FROM station_data
-WHERE year BETWEEN 2005 and 2010
+WHERE year BETWEEN 2005 AND 2010
 ```
 
 ### 4.4: Using `AND`
 
 ```sql
 SELECT * FROM station_data
-WHERE year >= 2005 and year <= 2010
+WHERE year >= 2005 AND year <= 2010
 ```
 
 ### 4.5: Exclusive Range
@@ -118,7 +125,7 @@ This will get the years between 2005 and 2010, but exclude 2005 and 2010
 
 ```sql
 SELECT * FROM station_data
-WHERE year > 2005 and year < 2010
+WHERE year > 2005 AND year < 2010
 ```
 
 ### 4.6: Using `OR`
@@ -556,10 +563,10 @@ report_code,
 year,
 
 CASE
-    WHEN month BETWEEN 1 and 3 THEN "Q1"
-    WHEN month BETWEEN 4 and 6 THEN "Q2"
-    WHEN month BETWEEN 7 and 9 THEN "Q3"
-    WHEN month BETWEEN 10 and 12 THEN "Q4"
+    WHEN month BETWEEN 1 and 3 THEN 'Q1'
+    WHEN month BETWEEN 4 and 6 THEN 'Q2'
+    WHEN month BETWEEN 7 and 9 THEN 'Q3'
+    WHEN month BETWEEN 10 and 12 THEN 'Q4'
 END as quarter,
 
 temperature
@@ -578,10 +585,10 @@ SELECT
 year,
 
 CASE
-    WHEN month BETWEEN 1 and 3 THEN "Q1"
-    WHEN month BETWEEN 4 and 6 THEN "Q2"
-    WHEN month BETWEEN 7 and 9 THEN "Q3"
-    WHEN month BETWEEN 10 and 12 THEN "Q4"
+    WHEN month BETWEEN 1 and 3 THEN 'Q1'
+    WHEN month BETWEEN 4 and 6 THEN 'Q2'
+    WHEN month BETWEEN 7 and 9 THEN 'Q3'
+    WHEN month BETWEEN 10 and 12 THEN 'Q4'
 END as quarter,
 
 AVG(temperature) as avg_temp
