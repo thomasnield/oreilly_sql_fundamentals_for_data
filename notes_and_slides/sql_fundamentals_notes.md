@@ -84,6 +84,19 @@ This works with any data types, like numbers, texts, and dates. Also note that s
 **SWITCH TO SLIDES** FOR EXERCISE
 
 
+## 3.6: Comments
+
+To make a comments in SQL, use commenting dashes or blocks:
+
+```sql
+-- this is a comment
+
+/*
+This is a
+multiline comment
+*/
+```
+
 ## Section IV- WHERE
 
 ### 4.1: Getting year 2010 records
