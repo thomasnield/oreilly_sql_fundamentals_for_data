@@ -38,6 +38,8 @@ PRICE * 1.07 AS TAXED_PRICE
 FROM PRODUCT;
 ```
 
+> In SQliteStudio, you can hit CTRL + SPACE on Windows and Linux to show an autocomplete box with available fields. For Mac, you will need to enable that configuration in preferences.
+
 You can also use aliases to declare an `UNTAXED_PRICE` column off the `PRICE`, without any expression.
 
 ```sql
@@ -62,6 +64,16 @@ FROM PRODUCT;
 ```
 
 ### 3.5: Text Concatenation
+
+You can slap a dollar sign to our result using concatenation.
+
+```sql
+SELECT PRODUCT_ID,
+DESCRIPTION,
+PRICE AS UNTAXED_PRICE,
+'$' || round(PRICE * 1.07, 2) AS TAXED_PRICE
+FROM PRODUCT
+```
 
 You can merge text via concatenation. For instance, you can concatenate two fields and put a comma and space ` ,` in between.
 
@@ -195,11 +207,21 @@ SELECT * FROM station_data
 WHERE length(report_code) != 6
 ```
 
-### 4.13: Using `LIKE` for any characters
+### 4.13A: Using `LIKE` for any characters
 
 ```sql
 SELECT * FROM station_data
 WHERE report_code LIKE 'A%';
+```
+
+### 4.13B: Using Regular Expressions
+
+
+If you are familiar with regular expressions, you can use those to identify and qualify text patterns.
+
+```sql
+SELECT * FROM STATION_DATA
+WHERE report_code REGEXP '^A.*$'
 ```
 
 ### 4.14: Using `LIKE` for one character
@@ -473,7 +495,7 @@ CASE
    WHEN wind_speed >= 40 THEN 'HIGH'
    WHEN wind_speed >= 30 AND wind_speed < 40 THEN 'MODERATE'
    ELSE 'LOW' END
-as wind_severity
+AS wind_severity
 
 FROM station_data
 ```
