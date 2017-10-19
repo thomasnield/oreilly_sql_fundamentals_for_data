@@ -635,7 +635,7 @@ GROUP BY 1,2
 
 # Section VII - JOIN
 
-### 7.1 INNER JOIN
+### 7.1A INNER JOIN
 
 (Refer to slides Section VII)
 
@@ -662,6 +662,31 @@ Joins allow us to keep stored data normalized and simple, but we can get more de
 
 Notice how two customers are omitted since they don't have any orders (refer to slides).
 
+
+### 7.2B A BAD APPROACH
+
+You may come across a style of joining where commas are used to select the needed tables, and a `WHERE` defines the join condition as shown below:
+
+```sql
+SELECT ORDER_ID,
+CUSTOMER.CUSTOMER_ID,
+ORDER_DATE,
+SHIP_DATE,
+NAME,
+STREET_ADDRESS,
+CITY,
+STATE,
+ZIP,
+PRODUCT_ID,
+ORDER_QTY
+
+FROM CUSTOMER, CUSTOMER_ORDER
+WHERE CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+```
+
+Do not use this approach no matter how much your colleagues use it (and educate them not to use it either). It is extremely inefficient as it will generate a cartesian product across both tables (every possible combination of records between both), and then filter it based on the WHERE. It does not work with `LEFT JOIN` either, which we will look at shortly.
+
+Using the `INNER JOIN` with an `ON` condition avoids the cartesian product and is more efficient. Therefore, always use that approach.
 
 ### 7.2 LEFT OUTER JOIN
 
