@@ -368,7 +368,6 @@ SELECT year, month, count(*) as record_count
 FROM station_data
 WHERE tornado = 1
 GROUP BY year, month
-ORDER BY year, month
 ```
 
 ### 5.7 Using ORDER BY with DESC
@@ -562,10 +561,36 @@ But you can use a single query using a `CASE` statement that sets a value to 0 i
 ```sql
 SELECT year, month,
 SUM(CASE WHEN tornado = 1 THEN precipitation ELSE 0 END) as tornado_precipitation,
-
 SUM(CASE WHEN tornado = 0 THEN precipitation ELSE 0 END) as non_tornado_precipitation
 
 FROM station_data GROUP BY year, month
+```
+
+Many folks who are not aware of the zero/null case trick will resort to derived tables (not covered in this class but covered in _Advanced SQL for Data Analysis_), which adds an unnecessary amount of effort and mess.
+
+```sql
+SELECT t.year,
+t.month,
+t.tornado_precipitation,
+non_t.non_tornado_precipitation
+
+FROM (
+    SELECT year, month,
+    SUM(precipitation) as tornado_precipitation
+    FROM station_data
+    WHERE tornado = 1
+    GROUP BY year, month
+) t
+
+INNER JOIN
+
+(
+    SELECT year, month,
+    SUM(precipitation) as non_tornado_precipitation
+    FROM station_data
+    WHERE tornado = 0
+    GROUP BY year, month
+) non_t
 ```
 
 ### 6.5 Using Null in a CASE to conditionalize MIN/MAX
@@ -1109,6 +1134,70 @@ To remove an index, use the `DROP` command.
 ```sql
 DROP INDEX price_index;
 ```
+
+
+### 9.7 Working with Dates and Times
+
+Use the ISO 'yyyy-mm-dd' syntax with strings to treat them as dates easily.
+
+Keep in mind much of this functionality is proprietary to SQLite. Make sure you learn the date and time functionality for your specific database platform.
+
+```sql
+SELECT * FROM CUSTOMER_ORDER
+WHERE SHIP_DATE < '2015-05-21'
+```
+
+To get today's date:
+
+```sql
+SELECT DATE('now')
+```
+
+To shift a date:
+
+```sql
+SELECT DATE('now','-1 day')
+SELECT DATE('2015-12-07','+3 month','-1 day')
+```
+
+To work with times, use `hh:mm:ss` format.
+
+```sql
+SELECT '16:31' < '08:31'
+```
+
+To get today's GMT time:
+
+```sql
+SELECT TIME('now')
+```
+
+To shift a time:
+
+```sql
+SELECT TIME('16:31','+1 minute')
+```
+
+To merge a date and time, use a DateTime type.
+
+```sql
+SELECT '2015-12-13 16:04:11'
+SELECT DATETIME('2015-12-13 16:04:11','-1 day','+3 hour')
+```
+
+To format dates and times a certain way:  
+
+``sql
+SELECT strftime('%d-%m-%Y', 'now')
+```
+
+Refer to SQLite documentation
+http://www.sqlite.org/lang_datefunc.html
+
+Another helpful tutorial on using dates and times with SQLite.
+https://www.tutorialspoint.com/sqlite/sqlite_date_time.htm
+
+
 
 # Section X - Moving Forward
 
