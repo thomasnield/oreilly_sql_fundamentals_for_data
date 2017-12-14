@@ -368,6 +368,7 @@ SELECT year, month, count(*) as record_count
 FROM station_data
 WHERE tornado = 1
 GROUP BY year, month
+ORDER BY year, month
 ```
 
 ### 5.7 Using ORDER BY with DESC
@@ -517,21 +518,22 @@ FROM station_data
 
 ### 6.3 Using CASE with GROUP BY
 
-We can use `GROUP BY` in conjunction with a `CASE` statement to slice data in more ways, such as getting the record count by `wind_severity` and `year`.
+We can use `GROUP BY` in conjunction with a `CASE` statement to slice data in more ways, such as getting the record count by `wind_severity`.
 
 ```sql
-SELECT year,
+SELECT
 
 CASE
-   WHEN wind_speed >= 40 THEN 'HIGH'
-   WHEN wind_speed >= 30 THEN 'MODERATE'
-   ELSE 'LOW' END
-as wind_severity,
+    WHEN wind_speed >= 40 THEN 'HIGH'
+    WHEN wind_speed >= 30 THEN 'MODERATE'
+    ELSE 'LOW'
+END AS wind_severity,
 
-COUNT(*) as record_count
+COUNT(*) AS record_count
 
-FROM station_data
-GROUP BY 1,2
+FROM STATION_DATA
+
+GROUP BY wind_severity
 ```
 
 ### 6.4 "Zero/Null" Case Trick
@@ -941,7 +943,7 @@ ROOM.FLOOR_NUMBER as FLOOR,
 ROOM.SEAT_CAPACITY as SEATS,
 START_TIME, END_TIME
 
-FROM PRESENTATION        
+FROM PRESENTATION
 
 INNER JOIN COMPANY
 ON PRESENTATION.BOOKED_COMPANY_ID = COMPANY.COMPANY_ID
