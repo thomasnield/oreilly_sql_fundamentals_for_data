@@ -510,8 +510,8 @@ SELECT report_code, year, month, day, wind_speed,
 CASE
    WHEN wind_speed >= 40 THEN 'HIGH'
    WHEN wind_speed >= 30 THEN 'MODERATE'
-   ELSE 'LOW' END
-as wind_severity
+   ELSE 'LOW'
+END as wind_severity
 
 FROM station_data
 ```
