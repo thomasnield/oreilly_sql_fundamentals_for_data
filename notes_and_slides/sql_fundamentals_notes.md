@@ -546,6 +546,7 @@ SELECT year, month,
 SUM(precipitation) as tornado_precipitation
 FROM station_data
 WHERE tornado = 1
+AND year >= 1990
 GROUP BY year, month
 ```
 
@@ -555,6 +556,7 @@ SELECT year, month,
 SUM(precipitation) as non_tornado_precipitation
 FROM station_data
 WHERE tornado = 0
+AND year >= 1990
 GROUP BY year, month
 ```
 
@@ -565,7 +567,10 @@ SELECT year, month,
 SUM(CASE WHEN tornado = 1 THEN precipitation ELSE 0 END) as tornado_precipitation,
 SUM(CASE WHEN tornado = 0 THEN precipitation ELSE 0 END) as non_tornado_precipitation
 
-FROM station_data GROUP BY year, month
+FROM station_data
+WHERE year >= 1990
+
+GROUP BY year, month
 ```
 
 Many folks who are not aware of the zero/null case trick will resort to derived tables (not covered in this class but covered in _Advanced SQL for Data Analysis_), which adds an unnecessary amount of effort and mess.
@@ -581,6 +586,7 @@ FROM (
     SUM(precipitation) as tornado_precipitation
     FROM station_data
     WHERE tornado = 1
+    AND year >= 1990
     GROUP BY year, month
 ) t
 
@@ -591,6 +597,7 @@ INNER JOIN
     SUM(precipitation) as non_tornado_precipitation
     FROM station_data
     WHERE tornado = 0
+    AND year >= 1990
     GROUP BY year, month
 ) non_t
 ```
@@ -606,6 +613,7 @@ SELECT year,
 MAX(CASE WHEN tornado = 0 THEN precipitation ELSE NULL END) as max_non_tornado_precipitation,
 MAX(CASE WHEN tornado = 1 THEN precipitation ELSE NULL END) as max_tornado_precipitation
 FROM station_data
+WHERE year >= 1990
 GROUP BY year
 ```
 
