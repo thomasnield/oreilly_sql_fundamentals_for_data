@@ -536,6 +536,24 @@ FROM STATION_DATA
 GROUP BY wind_severity
 ```
 
+Also, some wind_speed values are NULL, so maybe we should not use the `ELSE` and just exhaustively qualify only valid ranges, and let the rest fall under "NULL"
+
+```sql 
+SELECT
+
+CASE
+    WHEN wind_speed >= 40 THEN 'HIGH'
+    WHEN wind_speed >= 30 THEN 'MODERATE'
+    WHEN wind_speed >= 0 THEN 'LOW'
+END AS wind_severity,
+
+COUNT(*) AS record_count
+
+FROM station_data
+
+GROUP BY wind_severity
+```
+
 ### 6.4 "Zero/Null" Case Trick
 
 There is really no way to create multiple aggregations with different conditions unless you know a trick with the `CASE` statement. If you want to find two total precipitation, with and without tornado precipitations, for each year and month, you have to do separate queries.
