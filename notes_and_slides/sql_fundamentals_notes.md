@@ -1215,7 +1215,7 @@ SELECT DATETIME('2015-12-13 16:04:11','-1 day','+3 hour')
 
 To format dates and times a certain way:  
 
-``sql
+```sql
 SELECT strftime('%d-%m-%Y', 'now')
 ```
 
