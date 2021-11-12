@@ -1,2 +1,11 @@
-# oreilly_sql_fundamentals_for_data
+# O'Reilly SQL Fundamentals (Online Training)
+
 Resources for O'Reilly "SQL Fundamentals for Data" online training
+
+Recommended SQLite Environments: 
+
+*SQLiteOnline*
+http://sqliteonline.com/
+
+*SQLiteStudio*
+https://sqlitestudio.pl/features/
