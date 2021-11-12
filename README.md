@@ -9,3 +9,8 @@ http://sqliteonline.com/
 
 *SQLiteStudio*
 https://sqlitestudio.pl/features/
+
+
+**OTHER RESOURCES:**
+
+![](https://learning.oreilly.com/covers/urn:orm:book:9781491938607/400w/) 
