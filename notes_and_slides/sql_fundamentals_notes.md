@@ -1219,7 +1219,7 @@ SELECT DATETIME('2015-12-13 16:04:11','-1 day','+3 hour')
 
 To format dates and times a certain way:  
 
-``sql
+```sql
 SELECT strftime('%d-%m-%Y', 'now')
 ```
 
@@ -1229,16 +1229,3 @@ http://www.sqlite.org/lang_datefunc.html
 Another helpful tutorial on using dates and times with SQLite.
 https://www.tutorialspoint.com/sqlite/sqlite_date_time.htm
 
-
-
-# Section X - Moving Forward
-
-### SQL Resources
-
-[Getting Started with SQL (O'Reilly)](http://shop.oreilly.com/product/0636920044994.do) by Thomas Nield
-
-[Learning SQL (O'Reilly)](http://shop.oreilly.com/product/9780596520847.do) by Alan Beaulieu
-
-[Using SQLite (O'Reilly)](http://shop.oreilly.com/product/9780596521196.do) by Jay A. Kreibich
-
-[SQL Practice Problems](https://www.amazon.com/SQL-Practice-Problems-learn-doing/dp/1520807635/) by Sylvia Moestl Vasilik
