@@ -489,15 +489,18 @@ SELECT DISTINCT station_number, year FROM station_data
 You can use a `CASE` statement to turn a column value into another value based on conditions. For instance, we can turn different `wind_speed` ranges into `HIGH`, `MODERATE`, and `LOW` categories.
 
 ```sql
-SELECT report_code, year, month, day, wind_speed,
+SELECT report_code, year, month, day, wind_speed, 
 
-CASE
-   WHEN wind_speed >= 40 THEN 'HIGH'
-   WHEN wind_speed >= 30 AND wind_speed < 40 THEN 'MODERATE'
-   ELSE 'LOW' END
-AS wind_severity
+CASE 
+    WHEN wind_speed >= 40 THEN 'HIGH'
+    WHEN wind_speed >= 30 THEN 'MODERATE'
+    WHEN wind_speed >= 0 THEN 'LOW'
+    ELSE 'N/A'
+END AS wind_severity
 
 FROM station_data
+
+ORDER by wind_speed DESC
 ```
 
 ### 6.2 More Efficient Way To Categorize Wind Speed
@@ -521,22 +524,23 @@ FROM station_data
 We can use `GROUP BY` in conjunction with a `CASE` statement to slice data in more ways, such as getting the record count by `wind_severity`.
 
 ```sql
-SELECT
+SELECT 
 
-CASE
+CASE 
     WHEN wind_speed >= 40 THEN 'HIGH'
     WHEN wind_speed >= 30 THEN 'MODERATE'
-    ELSE 'LOW'
+    WHEN wind_speed >= 0 THEN 'LOW'
+    ELSE 'N/A'
 END AS wind_severity,
 
 COUNT(*) AS record_count
 
-FROM STATION_DATA
+FROM station_data
 
 GROUP BY wind_severity
 ```
 
-Also, some wind_speed values are NULL, so maybe we should not use the `ELSE` and just exhaustively qualify only valid ranges, and let the rest fall under "NULL"
+Also, some wind_speed values are NULL, so without an `ELSE` any records that do not meet a condition will turn out to be NULL. 
 
 ```sql 
 SELECT
