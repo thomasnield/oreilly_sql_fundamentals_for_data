@@ -1149,22 +1149,22 @@ ROLLBACK;
 
 ### 9.6 Creating Indexes
 
-You can create an index on a certain column to speed up SELECT performance, such as the `price` column on the `PRODUCT` table.
+You can create an index on a certain column to speed up SELECT performance, such as the `EMAIL` column on the `ATTENDEE` table.
 
 ```sql
-CREATE INDEX price_index ON PRODUCT(price);
+CREATE INDEX email_index ON ATTENDEE(EMAIL);
 ```
 
 You can also create an index for a column that has unique values, and it will make a special optimization for that case.
 
 ```sql
-CREATE UNIQUE INDEX name_index ON CUSTOMER(name);
+CREATE UNIQUE INDEX email_index ON ATTENDEE(EMAIL);
 ```
 
 To remove an index, use the `DROP` command.
 
 ```sql
-DROP INDEX price_index;
+DROP INDEX email_index;
 ```
 
 
