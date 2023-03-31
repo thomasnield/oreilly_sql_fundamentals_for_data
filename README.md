@@ -12,10 +12,9 @@ https://sqlitestudio.pl/features/
 
 # Open Databases Directly on SQliteOnline
 
-https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/databases/rexon_metals.db
-https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/databases/weather_stations.db
-
-
+https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/databases/rexon_metals.db
+https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/databases/weather_stations.db
+ 
 **OTHER RESOURCES:**
 
 [Intermediate SQL](https://github.com/thomasnield/oreilly_intermediate_sql_for_data/blob/master/intermediate_sql_class_notes.md) 
