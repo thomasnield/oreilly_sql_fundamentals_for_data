@@ -18,7 +18,7 @@ https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/or
 #### weather_stations.db
 https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/databases/weather_stations.db
  
-**OTHER RESOURCES:**
+## OTHER RESOURCES:
 
 [SQL Interactive Scenarios on O'Reilly](https://learning.oreilly.com/search/?q=thomas%20nield%20sql&type=cloud-scenario&type=sandbox&type=scenario)
 
