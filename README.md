@@ -30,7 +30,8 @@ https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/or
 
 [Intermediate SQL (Code Examples)](https://github.com/thomasnield/oreilly_intermediate_sql_for_data/blob/master/intermediate_sql_class_notes.md) 
 
-[Getting Started with SQL (O'Reilly Book)](https://learning.oreilly.com/library/view/getting-started-with/9781491938607/)
+[Anaconda Introduction to SQL (Using Python)](https://learning.anaconda.cloud/introduction-to-sql) 
 
+[Getting Started with SQL (O'Reilly Book)](https://learning.oreilly.com/library/view/getting-started-with/9781491938607/)
 
 ![](https://images-na.ssl-images-amazon.com/images/I/51A7fbsp0EL.jpg)
