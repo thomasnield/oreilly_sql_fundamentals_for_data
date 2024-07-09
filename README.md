@@ -12,8 +12,10 @@ https://sqlitestudio.pl/features/
 
 # Open Databases Directly on SQliteOnline
 
+## rexon_metals.db
 https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/databases/rexon_metals.db
 
+## weather_stations.db
 https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/databases/weather_stations.db
  
 **OTHER RESOURCES:**
@@ -24,9 +26,9 @@ https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/or
 
 [SQL for Analytics Course on O'Reilly](https://learning.oreilly.com/videos/sql-for-analytics/9781492058212/)
 
-[SQL with Python, R, and Java](https://github.com/thomasnield/oreilly_programming_with_sql/tree/master/code)
+[SQL with Python, R, and Java (Code Examples)](https://github.com/thomasnield/oreilly_programming_with_sql/tree/master/code)
 
-[Intermediate SQL](https://github.com/thomasnield/oreilly_intermediate_sql_for_data/blob/master/intermediate_sql_class_notes.md) 
+[Intermediate SQL (Code Examples)](https://github.com/thomasnield/oreilly_intermediate_sql_for_data/blob/master/intermediate_sql_class_notes.md) 
 
 [O'Reilly book _Getting Started with SQL_](https://learning.oreilly.com/library/view/getting-started-with/9781491938607/)
 
