@@ -36,5 +36,7 @@ https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/or
 
 [Anaconda Introduction to SQL (Using Python)](https://learning.anaconda.cloud/introduction-to-sql) 
 
+[An Introduction to Regular Expressions](https://learning.oreilly.com/library/view/an-introduction-to/9781492082569/) 
+
 [Regular Expressions Interactive Labs](https://learning.oreilly.com/search/?q=thomas%20nield%20regular%20expressions&type=sandbox&type=scenario&type=cloud-scenario&rows=100&language_with_transcripts=en)
 
