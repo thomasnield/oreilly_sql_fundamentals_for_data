@@ -20,6 +20,10 @@ https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/or
  
 ## OTHER RESOURCES:
 
+[Getting Started with SQL (O'Reilly Book)](https://learning.oreilly.com/library/view/getting-started-with/9781491938607/)
+
+![](https://images-na.ssl-images-amazon.com/images/I/51A7fbsp0EL.jpg)
+
 [SQL Interactive Scenarios on O'Reilly](https://learning.oreilly.com/search/?q=thomas%20nield%20sql&type=cloud-scenario&type=sandbox&type=scenario)
 
 [SQL Fundamentals for Data Video Course on O'Reilly](https://learning.oreilly.com/videos/-/9781491963876/)
@@ -32,6 +36,5 @@ https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/or
 
 [Anaconda Introduction to SQL (Using Python)](https://learning.anaconda.cloud/introduction-to-sql) 
 
-[Getting Started with SQL (O'Reilly Book)](https://learning.oreilly.com/library/view/getting-started-with/9781491938607/)
+[Regular Expressions Interactive Labs](https://learning.oreilly.com/search/?q=thomas%20nield%20regular%20expressions&type=sandbox&type=scenario&type=cloud-scenario&rows=100&language_with_transcripts=en)
 
-![](https://images-na.ssl-images-amazon.com/images/I/51A7fbsp0EL.jpg)
