@@ -1,4 +1,4 @@
-
+![image](https://github.com/user-attachments/assets/5bd6d982-fb06-4fc2-aaf3-f08837a8d81d)![image](https://github.com/user-attachments/assets/7d6fe89d-2078-4c21-8496-80421f0cb62f)
 # Section III - SELECT
 
 ### 3.1: Selecting all columns
@@ -316,6 +316,46 @@ You must group up the sleet condition in parenthesis so it is treated as one uni
 SELECT * FROM station_data
 WHERE (rain = 1 AND temperature <= 32)
 OR snow_depth > 0;
+```
+### Exercises
+
+```sql
+-- SELECT all records where TEMPERATURE is between 30 and 50 degrees
+
+SELECT * FROM station_data
+WHERE temperature BETWEEN 30 AND 50;
+-- OR
+SELECT * FROM station_data
+WHERE temperature >= 30 and temperature <= 50;
+```
+
+```sql
+-- SELECT all records where station_pressure is greater than 1000 and a tornado was present
+
+SELECT * FROM STATION_DATA
+WHERE station_pressure > 1000 AND tornado;
+-- OR
+SELECT * FROM STATION_DATA
+WHERE station_pressure > 1000 AND tornado = 1;
+```
+
+```sql
+-- SELECT all records with report codes E6AED7, B950A1, 98DDAD
+
+SELECT * FROM STATION_DATA
+WHERE report_code IN ('E6AED7','B950A1','98DDAD')
+-- OR
+SELECT * FROM STATION_DATA
+WHERE report_code = 'E6AED7‘
+OR report_code = 'B950A1‘
+OR report_code = '98DDAD'
+```
+
+```sql
+-- SELECT all records WHERE station_pressure is null
+
+SELECT * FROM STATION_DATA
+WHERE station_pressure IS NULL;
 ```
 
 # Section V- GROUP BY and ORDER BY
