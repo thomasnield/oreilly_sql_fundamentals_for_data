@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/5bd6d982-fb06-4fc2-aaf3-f08837a8d81d)![image](https://github.com/user-attachments/assets/7d6fe89d-2078-4c21-8496-80421f0cb62f)
 # Section III - SELECT
 
 ### 3.1: Selecting all columns
