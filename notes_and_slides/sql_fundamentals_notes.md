@@ -346,8 +346,8 @@ SELECT * FROM STATION_DATA
 WHERE report_code IN ('E6AED7','B950A1','98DDAD')
 -- OR
 SELECT * FROM STATION_DATA
-WHERE report_code = 'E6AED7‘
-OR report_code = 'B950A1‘
+WHERE report_code = 'E6AED7'
+OR report_code = 'B950A1'
 OR report_code = '98DDAD'
 ```
 
