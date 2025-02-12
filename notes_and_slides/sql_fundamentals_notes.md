@@ -686,44 +686,6 @@ INNER JOIN
 ) non_t
 ```
 
-### Exercise
-
-```sql
--- SELECT  the report_code, year, quarter, and temperature, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively. 
-
-SELECT report_code,
-year,
-
-CASE
-    WHEN month BETWEEN 1 AND 3 THEN 'Q1'
-    WHEN month BETWEEN 4 and 6 THEN 'Q2'
-    WHEN month BETWEEN 7 AND 9 THEN 'Q3'
-    WHEN month BETWEEN 10 AND 12 THEN 'Q4'
-END AS quarter,
-
-temperature
-
-FROM STATION_DATA
-
-```
-
-```sql
--- Get the average temperature grouped by quarter and year, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively. 
-
-SELECT year,
-
-CASE
-    WHEN month BETWEEN 1 AND 3 THEN 'Q1'
-    WHEN month BETWEEN 4 and 6 THEN 'Q2'
-    WHEN month BETWEEN 7 AND 9 THEN 'Q3'
-    WHEN month BETWEEN 10 AND 12 THEN 'Q4'
-END AS quarter,
-
-AVG(temperature) AS avg_temp
-
-FROM STATION_DATA
-GROUP BY 1, 2
-```
 
 ### 6.5 Using Null in a CASE to conditionalize MIN/MAX
 
@@ -769,7 +731,7 @@ FROM STATION_DATA
 
 ### Exercise 6.2
 
-Get the average temperature by quarter and month, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively.
+Get the average temperature by quarter and year, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively.
 
 **ANSWER**
 
