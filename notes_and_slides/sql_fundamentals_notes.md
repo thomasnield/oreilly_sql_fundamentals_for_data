@@ -524,7 +524,7 @@ SELECT DISTINCT station_number, year FROM station_data
 ### Exercise
 
 ```sql
-// Find the SUM of precipitation by year when a tornado was present, and sort by year descending.
+-- Find the SUM of precipitation by year when a tornado was present, and sort by year descending.
 
 SELECT year, 
 SUM(precipitation) as tornado_precipitation
@@ -535,7 +535,7 @@ ORDER BY year DESC
 ```
 
 ```sql
-// SELECT the year and max snow depth, but only years where the max snow depth is at least 50.
+-- SELECT the year and max snow depth, but only years where the max snow depth is at least 50.
 
 SELECT year, 
 max(snow_depth) AS max_snow_depth
@@ -689,7 +689,7 @@ INNER JOIN
 ### Exercise
 
 ```sql
-// SELECT  the report_code, year, quarter, and temperature, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively. 
+-- SELECT  the report_code, year, quarter, and temperature, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively. 
 
 SELECT report_code,
 year,
@@ -708,7 +708,7 @@ FROM STATION_DATA
 ```
 
 ```sql
-// Get the average temperature grouped by quarter and year, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively. 
+-- Get the average temperature grouped by quarter and year, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively. 
 
 SELECT year,
 
