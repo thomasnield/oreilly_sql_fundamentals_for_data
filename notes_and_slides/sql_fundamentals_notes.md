@@ -521,6 +521,29 @@ You can also get distinct combinations of values for multiple columns
 SELECT DISTINCT station_number, year FROM station_data
 ```
 
+### Exercise
+
+```sql
+// Find the SUM of precipitation by year when a tornado was present, and sort by year descending.
+
+SELECT year, 
+SUM(precipitation) as tornado_precipitation
+FROM station_data
+WHERE tornado = 1
+GROUP BY year
+ORDER BY year DESC
+```
+
+```sql
+// SELECT the year and max snow depth, but only years where the max snow depth is at least 50.
+
+SELECT year, 
+max(snow_depth) AS max_snow_depth
+FROM STATION_DATA
+GROUP BY year
+HAVING max_snow_depth >= 50
+```
+
 # Section VI - CASE Statements
 
 ### 6.1 Categorizing Wind Speed
@@ -661,6 +684,45 @@ INNER JOIN
     AND year >= 1990
     GROUP BY year, month
 ) non_t
+```
+
+### Exercise
+
+```sql
+// SELECT  the report_code, year, quarter, and temperature, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively. 
+
+SELECT report_code,
+year,
+
+CASE
+    WHEN month BETWEEN 1 AND 3 THEN 'Q1'
+    WHEN month BETWEEN 4 and 6 THEN 'Q2'
+    WHEN month BETWEEN 7 AND 9 THEN 'Q3'
+    WHEN month BETWEEN 10 AND 12 THEN 'Q4'
+END AS quarter,
+
+temperature
+
+FROM STATION_DATA
+
+```
+
+```sql
+// Get the average temperature grouped by quarter and year, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively. 
+
+SELECT year,
+
+CASE
+    WHEN month BETWEEN 1 AND 3 THEN 'Q1'
+    WHEN month BETWEEN 4 and 6 THEN 'Q2'
+    WHEN month BETWEEN 7 AND 9 THEN 'Q3'
+    WHEN month BETWEEN 10 AND 12 THEN 'Q4'
+END AS quarter,
+
+AVG(temperature) AS avg_temp
+
+FROM STATION_DATA
+GROUP BY 1, 2
 ```
 
 ### 6.5 Using Null in a CASE to conditionalize MIN/MAX
