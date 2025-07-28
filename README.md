@@ -21,6 +21,8 @@ https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/or
 #### JetBrains Promotion
 Get a free 3 month license for JetBrains developer tools (including PyCharm, DataGrip) using code 3min_datascience: https://www.jetbrains.com/all/
 
+# Resources 
+
 #### Links Mentioned in Class
 
 [Asianometry - The History of SQL](https://youtu.be/z8L202FlmD4?si=ObwEtRU2ND0SNSG1)
@@ -33,7 +35,7 @@ Get a free 3 month license for JetBrains developer tools (including PyCharm, Dat
 
 [Silver Bullet Syndrome 2025 - Hadi Hariri](https://youtu.be/TIu6rQVwTkM?si=953rhVOAjiOiR4Gv)
 
-## OTHER RESOURCES:
+#### Other SQL and SQL-Related Resources
 
 [Other Online Trainings/Books by Thomas Nield](https://www.oreilly.com/pub/au/6658)
 
