@@ -18,10 +18,10 @@ https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/or
 #### weather_stations.db
 https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/databases/weather_stations.db
 
+# Resources 
+
 #### JetBrains Promotion
 Get a free 3 month license for JetBrains developer tools (including PyCharm, DataGrip) using code 3min_datascience: https://www.jetbrains.com/all/
-
-# Resources 
 
 #### Links Mentioned in Class
 
