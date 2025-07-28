@@ -17,8 +17,25 @@ https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/or
 
 #### weather_stations.db
 https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/databases/weather_stations.db
- 
+
+#### JetBrains Promotion
+Get a free 3 month license for JetBrains developer tools (including PyCharm, DataGrip) using code 3min_datascience: https://www.jetbrains.com/all/
+
+#### Links Mentioned in Class
+
+[Asianometry - The History of SQL](https://youtu.be/z8L202FlmD4?si=ObwEtRU2ND0SNSG1)
+
+[Asianometry - The History of Oracle](https://youtu.be/zSn8il5Mo5s?si=1G4lJ9Umb0xgopHd)
+
+[Silver Bullet Syndrome - Hadi Hariri](https://youtu.be/qamzvLfX-Zo?si=fClyuZepv5zxvjd9)
+
+[Silver Bullet Syndrome - Hadi Hariri](https://youtu.be/WN3CSOai_ZU?si=MkxCn92pfeXoSUD8)
+
+[Silver Bullet Syndrome 2025 - Hadi Hariri](https://youtu.be/TIu6rQVwTkM?si=953rhVOAjiOiR4Gv)
+
 ## OTHER RESOURCES:
+
+[Other Online Trainings/Books by Thomas Nield](https://www.oreilly.com/pub/au/6658)
 
 [Getting Started with SQL (O'Reilly Book)](https://learning.oreilly.com/library/view/getting-started-with/9781491938607/)
 
