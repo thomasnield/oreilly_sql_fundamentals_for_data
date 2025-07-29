@@ -1,0 +1,898 @@
+Document Name
+Section III - SELECT.md
+MarkdownPreviewToggle Mode
+
+
+
+<h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="Section_III__SELECT_0"></a>Section III - SELECT</h1>
+<h3 class="code-line" data-line-start=2 data-line-end=3 ><a id="31_Selecting_all_columns_2"></a>3.1: Selecting all columns</h3>
+<pre><code class="has-line-data" data-line-start="5" data-line-end="7" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> CUSTOMER;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="9" data-line-end="10">To limit the number of records returned, use a LIMIT. To limit the results to just 2 records:</p>
+<pre><code class="has-line-data" data-line-start="12" data-line-end="14" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> CUSTOMER <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">2</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=15 data-line-end=16 ><a id="32_Selecting_specific_columns_15"></a>3.2: Selecting specific columns</h3>
+<pre><code class="has-line-data" data-line-start="18" data-line-end="20" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> CUSTOMER_ID, <span class="hljs-keyword">NAME</span> <span class="hljs-keyword">FROM</span> CUSTOMER;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=21 data-line-end=22 ><a id="33_Expressions_21"></a>3.3: Expressions</h3>
+<p class="has-line-data" data-line-start="23" data-line-end="24">First, select everything from <code>PRODUCT</code></p>
+<pre><code class="has-line-data" data-line-start="26" data-line-end="28" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> PRODUCT;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="29" data-line-end="30">You can use expressions by declaring a <code>TAXED_PRICE</code>. This is not a column, but rather something that is calculated every time this query is executed.</p>
+<pre><code class="has-line-data" data-line-start="32" data-line-end="38" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> PRODUCT_ID,
+DESCRIPTION,
+PRICE,
+PRICE * <span class="hljs-number">1.07</span> <span class="hljs-keyword">AS</span> TAXED_PRICE
+<span class="hljs-keyword">FROM</span> PRODUCT;</span>
+</code></pre>
+<blockquote>
+<p class="has-line-data" data-line-start="39" data-line-end="40">In SQliteStudio, you can hit CTRL + SPACE on Windows and Linux to show an autocomplete box with available fields. For Mac, you will need to enable that configuration in preferences.</p>
+</blockquote>
+<p class="has-line-data" data-line-start="41" data-line-end="42">You can also use aliases to declare an <code>UNTAXED_PRICE</code> column off the <code>PRICE</code>, without any expression.</p>
+<pre><code class="has-line-data" data-line-start="44" data-line-end="50" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> PRODUCT_ID,
+DESCRIPTION,
+PRICE <span class="hljs-keyword">as</span> UNTAXED_PRICE,
+PRICE * <span class="hljs-number">1.07</span> <span class="hljs-keyword">AS</span> TAXED_PRICE
+<span class="hljs-keyword">FROM</span> PRODUCT;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="51" data-line-end="52"><strong>SWITCH TO SLIDES</strong> FOR MATHEMATICAL OPERATORS</p>
+<h3 class="code-line" data-line-start=53 data-line-end=54 ><a id="34_Using_round_Function_53"></a>3.4: Using <code>round()</code> Function</h3>
+<pre><code class="has-line-data" data-line-start="56" data-line-end="63" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> PRODUCT_ID,
+DESCRIPTION,
+PRICE,
+<span class="hljs-keyword">round</span>(PRICE * <span class="hljs-number">1.07</span>, <span class="hljs-number">2</span>) <span class="hljs-keyword">AS</span> TAXED_PRICE
+
+<span class="hljs-keyword">FROM</span> PRODUCT;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=64 data-line-end=65 ><a id="35_Text_Concatenation_64"></a>3.5: Text Concatenation</h3>
+<p class="has-line-data" data-line-start="66" data-line-end="67">You can slap a dollar sign to our result using concatenation.</p>
+<pre><code class="has-line-data" data-line-start="69" data-line-end="75" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> PRODUCT_ID,
+DESCRIPTION,
+PRICE <span class="hljs-keyword">AS</span> UNTAXED_PRICE,
+<span class="hljs-string">'$'</span> || <span class="hljs-keyword">round</span>(PRICE * <span class="hljs-number">1.07</span>, <span class="hljs-number">2</span>) <span class="hljs-keyword">AS</span> TAXED_PRICE
+<span class="hljs-keyword">FROM</span> PRODUCT
+</span></code></pre>
+<p class="has-line-data" data-line-start="76" data-line-end="77">You can merge text via concatenation. For instance, you can concatenate two fields and put a comma and space <code>,</code> in between.</p>
+<pre><code class="has-line-data" data-line-start="79" data-line-end="83" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">NAME</span>,
+CITY || <span class="hljs-string">', '</span> || STATE <span class="hljs-keyword">AS</span> LOCATION
+<span class="hljs-keyword">FROM</span> CUSTOMER;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="84" data-line-end="85">You can concatenate several fields to create an address.</p>
+<pre><code class="has-line-data" data-line-start="87" data-line-end="91" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">NAME</span>,
+STREET_ADDRESS || <span class="hljs-string">' '</span> || CITY || <span class="hljs-string">', '</span> || STATE || <span class="hljs-string">' '</span> || ZIP <span class="hljs-keyword">AS</span> SHIP_ADDRESS
+<span class="hljs-keyword">FROM</span> CUSTOMER;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="92" data-line-end="93">This works with any data types, like numbers, texts, and dates. Also note that some platforms use <code>concat()</code> function instead of double pipes <code>||</code></p>
+<p class="has-line-data" data-line-start="94" data-line-end="95"><strong>SWITCH TO SLIDES</strong> FOR EXERCISE</p>
+<h2 class="code-line" data-line-start=97 data-line-end=98 ><a id="36_Comments_97"></a>3.6: Comments</h2>
+<p class="has-line-data" data-line-start="99" data-line-end="100">To make a comments in SQL, use commenting dashes or blocks:</p>
+<pre><code class="has-line-data" data-line-start="102" data-line-end="109" class="language-sql"><span class="hljs-comment">-- this is a comment</span>
+
+<span class="hljs-comment">/*
+This is a
+multiline comment
+*/</span>
+</code></pre>
+<h2 class="code-line" data-line-start=110 data-line-end=111 ><a id="Section_IV_WHERE_110"></a>Section IV- WHERE</h2>
+<h3 class="code-line" data-line-start=112 data-line-end=113 ><a id="41_Getting_year_2010_records_112"></a>4.1: Getting year 2010 records</h3>
+<pre><code class="has-line-data" data-line-start="115" data-line-end="118" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> = <span class="hljs-number">2010</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=119 data-line-end=120 ><a id="42_Getting_non2010_records_119"></a>4.2: Getting non-2010 records</h3>
+<pre><code class="has-line-data" data-line-start="122" data-line-end="125" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> != <span class="hljs-number">2010</span>;</span>
+</code></pre>
+<pre><code class="has-line-data" data-line-start="127" data-line-end="130" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> &lt;&gt; <span class="hljs-number">2010</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=131 data-line-end=132 ><a id="43_Getting_records_between_2005_and_2010_131"></a>4.3: Getting records between 2005 and 2010</h3>
+<pre><code class="has-line-data" data-line-start="134" data-line-end="137" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">2005</span> <span class="hljs-keyword">AND</span> <span class="hljs-number">2010</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=138 data-line-end=139 ><a id="44_Using_AND_138"></a>4.4: Using <code>AND</code></h3>
+<pre><code class="has-line-data" data-line-start="141" data-line-end="144" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">2005</span> <span class="hljs-keyword">AND</span> <span class="hljs-keyword">year</span> &lt;= <span class="hljs-number">2010</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=145 data-line-end=146 ><a id="45_Exclusive_Range_145"></a>4.5: Exclusive Range</h3>
+<p class="has-line-data" data-line-start="147" data-line-end="148">This will get the years between 2005 and 2010, but exclude 2005 and 2010</p>
+<pre><code class="has-line-data" data-line-start="150" data-line-end="153" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> &gt; <span class="hljs-number">2005</span> <span class="hljs-keyword">AND</span> <span class="hljs-keyword">year</span> &lt; <span class="hljs-number">2010</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=154 data-line-end=155 ><a id="46_Using_OR_154"></a>4.6: Using <code>OR</code></h3>
+<pre><code class="has-line-data" data-line-start="157" data-line-end="163" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">MONTH</span> = <span class="hljs-number">3</span>
+<span class="hljs-keyword">OR</span> <span class="hljs-keyword">MONTH</span> = <span class="hljs-number">6</span>
+<span class="hljs-keyword">OR</span> <span class="hljs-keyword">MONTH</span> = <span class="hljs-number">9</span>
+<span class="hljs-keyword">OR</span> <span class="hljs-keyword">MONTH</span> = <span class="hljs-number">12</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=164 data-line-end=165 ><a id="47_Using_IN_164"></a>4.7: Using <code>IN</code></h3>
+<pre><code class="has-line-data" data-line-start="167" data-line-end="170" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">MONTH</span> <span class="hljs-keyword">IN</span> (<span class="hljs-number">3</span>,<span class="hljs-number">6</span>,<span class="hljs-number">9</span>,<span class="hljs-number">12</span>);</span>
+</code></pre>
+<h3 class="code-line" data-line-start=171 data-line-end=172 ><a id="48_Using_NOT_IN_171"></a>4.8: Using <code>NOT IN</code></h3>
+<pre><code class="has-line-data" data-line-start="174" data-line-end="177" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">MONTH</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> (<span class="hljs-number">3</span>,<span class="hljs-number">6</span>,<span class="hljs-number">9</span>,<span class="hljs-number">12</span>);</span>
+</code></pre>
+<h3 class="code-line" data-line-start=178 data-line-end=179 ><a id="49_Using_Modulus_178"></a>4.9: Using Modulus</h3>
+<p class="has-line-data" data-line-start="180" data-line-end="181">The modulus will perform division but return the remainder. So a remainder of 0 means the two numbers divide evenly.</p>
+<pre><code class="has-line-data" data-line-start="183" data-line-end="186" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">MONTH</span> % <span class="hljs-number">3</span> = <span class="hljs-number">0</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=187 data-line-end=188 ><a id="410_Using_WHERE_on_TEXT_187"></a>4.10: Using <code>WHERE</code> on TEXT</h3>
+<pre><code class="has-line-data" data-line-start="190" data-line-end="193" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> report_code = <span class="hljs-string">'513A63'</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=194 data-line-end=195 ><a id="411_Using_IN_with_text_194"></a>4.11: Using <code>IN</code> with text</h3>
+<pre><code class="has-line-data" data-line-start="197" data-line-end="200" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> report_code <span class="hljs-keyword">IN</span> (<span class="hljs-string">'513A63'</span>,<span class="hljs-string">'1F8A7B'</span>,<span class="hljs-string">'EF616A'</span>)
+</span></code></pre>
+<h3 class="code-line" data-line-start=201 data-line-end=202 ><a id="412_Using_length_function_201"></a>4.12: Using <code>length()</code> function</h3>
+<pre><code class="has-line-data" data-line-start="204" data-line-end="207" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">length</span>(report_code) != <span class="hljs-number">6</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=208 data-line-end=209 ><a id="413A_Using_LIKE_for_any_characters_208"></a>4.13A: Using <code>LIKE</code> for any characters</h3>
+<pre><code class="has-line-data" data-line-start="211" data-line-end="214" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> report_code <span class="hljs-keyword">LIKE</span> <span class="hljs-string">'A%'</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=215 data-line-end=216 ><a id="413B_Using_Regular_Expressions_215"></a>4.13B: Using Regular Expressions</h3>
+<p class="has-line-data" data-line-start="218" data-line-end="219">If you are familiar with regular expressions, you can use those to identify and qualify text patterns.</p>
+<pre><code class="has-line-data" data-line-start="221" data-line-end="224" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> STATION_DATA
+<span class="hljs-keyword">WHERE</span> report_code REGEXP <span class="hljs-string">'^A.*$'</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=225 data-line-end=226 ><a id="414_Using_LIKE_for_one_character_225"></a>4.14: Using <code>LIKE</code> for one character</h3>
+<pre><code class="has-line-data" data-line-start="228" data-line-end="231" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> report_code <span class="hljs-keyword">LIKE</span> <span class="hljs-string">'B_C%'</span>;</span>
+</code></pre>
+<blockquote>
+<p class="has-line-data" data-line-start="232" data-line-end="233">For <code>LIKE</code>, <code>%</code> is used in a different context than modulus <code>%</code></p>
+</blockquote>
+<h3 class="code-line" data-line-start=234 data-line-end=235 ><a id="415_True_Booleans_1_234"></a>4.15: True Booleans 1</h3>
+<pre><code class="has-line-data" data-line-start="237" data-line-end="240" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">1</span> <span class="hljs-keyword">AND</span> hail = <span class="hljs-number">1</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=241 data-line-end=242 ><a id="416_True_Booleans_2_241"></a>4.16: True Booleans 2</h3>
+<pre><code class="has-line-data" data-line-start="244" data-line-end="247" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado <span class="hljs-keyword">AND</span> hail
+</span></code></pre>
+<h3 class="code-line" data-line-start=248 data-line-end=249 ><a id="417_False_Booleans_1_248"></a>4.17: False Booleans 1</h3>
+<pre><code class="has-line-data" data-line-start="251" data-line-end="254" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">0</span> <span class="hljs-keyword">AND</span> hail = <span class="hljs-number">1</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=255 data-line-end=256 ><a id="418_False_Booleans_2_255"></a>4.18: False Booleans 2</h3>
+<pre><code class="has-line-data" data-line-start="258" data-line-end="261" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">NOT</span> tornado <span class="hljs-keyword">AND</span> hail;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=262 data-line-end=263 ><a id="419_Handling_NULL_262"></a>4.19: Handling <code>NULL</code></h3>
+<p class="has-line-data" data-line-start="264" data-line-end="265">A <code>NULL</code> is an absent value. It is not zero, empty text ’ ', or any value. It is blank.</p>
+<p class="has-line-data" data-line-start="266" data-line-end="267">To check for a null value:</p>
+<pre><code class="has-line-data" data-line-start="269" data-line-end="272" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> snow_depth <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=274 data-line-end=275 ><a id="420_Handling_NULL_in_conditions_274"></a>4.20: Handling <code>NULL</code> in conditions</h3>
+<p class="has-line-data" data-line-start="276" data-line-end="277">Nulls will not qualify with any condition that doesn’t explicitly handle it.</p>
+<pre><code class="has-line-data" data-line-start="279" data-line-end="282" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> precipitation &lt;= <span class="hljs-number">0.5</span>;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="283" data-line-end="284">If you want to include nulls, do this:</p>
+<pre><code class="has-line-data" data-line-start="286" data-line-end="289" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> precipitation <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">OR</span> precipitation &lt;= <span class="hljs-number">0.5</span>;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="290" data-line-end="291">You can also use a <code>coalesce()</code> function to turn a null value into a default value, if it indeed is null.</p>
+<p class="has-line-data" data-line-start="292" data-line-end="293">This will treat all null values as a 0.</p>
+<pre><code class="has-line-data" data-line-start="295" data-line-end="298" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">coalesce</span>(precipitation, <span class="hljs-number">0</span>) &lt;= <span class="hljs-number">0.5</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=299 data-line-end=300 ><a id="421_Combining_AND_and_OR_299"></a>4.21: Combining <code>AND</code> and <code>OR</code></h3>
+<p class="has-line-data" data-line-start="301" data-line-end="302">Querying for sleet or snow</p>
+<p class="has-line-data" data-line-start="303" data-line-end="304">Problematic. What belongs to the <code>AND</code> and what belongs to the <code>OR</code>?</p>
+<pre><code class="has-line-data" data-line-start="306" data-line-end="310" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> rain = <span class="hljs-number">1</span> <span class="hljs-keyword">AND</span> temperature &lt;= <span class="hljs-number">32</span>
+<span class="hljs-keyword">OR</span> snow_depth &gt; <span class="hljs-number">0</span>;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="311" data-line-end="312">You must group up the sleet condition in parenthesis so it is treated as one unit.</p>
+<pre><code class="has-line-data" data-line-start="314" data-line-end="318" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> (rain = <span class="hljs-number">1</span> <span class="hljs-keyword">AND</span> temperature &lt;= <span class="hljs-number">32</span>)
+<span class="hljs-keyword">OR</span> snow_depth &gt; <span class="hljs-number">0</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=318 data-line-end=319 ><a id="Exercises_318"></a>Exercises</h3>
+<pre><code class="has-line-data" data-line-start="321" data-line-end="329" class="language-sql"><span class="hljs-comment">-- SELECT all records where TEMPERATURE is between 30 and 50 degrees</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> temperature <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">30</span> <span class="hljs-keyword">AND</span> <span class="hljs-number">50</span>;</span>
+<span class="hljs-comment">-- OR</span>
+<span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> temperature &gt;= <span class="hljs-number">30</span> <span class="hljs-keyword">and</span> temperature &lt;= <span class="hljs-number">50</span>;</span>
+</code></pre>
+<pre><code class="has-line-data" data-line-start="331" data-line-end="339" class="language-sql"><span class="hljs-comment">-- SELECT all records where station_pressure is greater than 1000 and a tornado was present</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> STATION_DATA
+<span class="hljs-keyword">WHERE</span> station_pressure &gt; <span class="hljs-number">1000</span> <span class="hljs-keyword">AND</span> tornado;</span>
+<span class="hljs-comment">-- OR</span>
+<span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> STATION_DATA
+<span class="hljs-keyword">WHERE</span> station_pressure &gt; <span class="hljs-number">1000</span> <span class="hljs-keyword">AND</span> tornado = <span class="hljs-number">1</span>;</span>
+</code></pre>
+<pre><code class="has-line-data" data-line-start="341" data-line-end="351" class="language-sql"><span class="hljs-comment">-- SELECT all records with report codes E6AED7, B950A1, 98DDAD</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> STATION_DATA
+<span class="hljs-keyword">WHERE</span> report_code <span class="hljs-keyword">IN</span> (<span class="hljs-string">'E6AED7'</span>,<span class="hljs-string">'B950A1'</span>,<span class="hljs-string">'98DDAD'</span>)
+<span class="hljs-comment">-- OR</span>
+<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> STATION_DATA
+<span class="hljs-keyword">WHERE</span> report_code = <span class="hljs-string">'E6AED7'</span>
+<span class="hljs-keyword">OR</span> report_code = <span class="hljs-string">'B950A1'</span>
+<span class="hljs-keyword">OR</span> report_code = <span class="hljs-string">'98DDAD'</span>
+</span></code></pre>
+<pre><code class="has-line-data" data-line-start="353" data-line-end="358" class="language-sql"><span class="hljs-comment">-- SELECT all records WHERE station_pressure is null</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> STATION_DATA
+<span class="hljs-keyword">WHERE</span> station_pressure <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span>;</span>
+</code></pre>
+<h1 class="code-line" data-line-start=359 data-line-end=360 ><a id="Section_V_GROUP_BY_and_ORDER_BY_359"></a>Section V- GROUP BY and ORDER BY</h1>
+<h3 class="code-line" data-line-start=362 data-line-end=363 ><a id="51_Getting_a_count_of_records_362"></a>5.1: Getting a count of records</h3>
+<pre><code class="has-line-data" data-line-start="365" data-line-end="367" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">count</span>(*) <span class="hljs-keyword">as</span> record_count <span class="hljs-keyword">FROM</span> station_data
+</span></code></pre>
+<h3 class="code-line" data-line-start=368 data-line-end=369 ><a id="52_Getting_a_count_of_records_with_a_condition_368"></a>5.2 Getting a count of records with a condition</h3>
+<pre><code class="has-line-data" data-line-start="371" data-line-end="374" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">count</span>(*) <span class="hljs-keyword">as</span> record_count <span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">1</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=375 data-line-end=376 ><a id="53_Getting_a_count_by_year_375"></a>5.3 Getting a count by year</h3>
+<pre><code class="has-line-data" data-line-start="378" data-line-end="383" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">count</span>(*) <span class="hljs-keyword">as</span> record_count
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">1</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=384 data-line-end=385 ><a id="54_Getting_a_count_by_year_month_384"></a>5.4 Getting a count by year, month</h3>
+<pre><code class="has-line-data" data-line-start="387" data-line-end="392" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>, <span class="hljs-keyword">count</span>(*) <span class="hljs-keyword">as</span> record_count
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">1</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=393 data-line-end=394 ><a id="55_Getting_a_count_by_year_month_with_ordinal_index_393"></a>5.5 Getting a count by year, month with ordinal index</h3>
+<pre><code class="has-line-data" data-line-start="396" data-line-end="401" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>, <span class="hljs-keyword">count</span>(*) <span class="hljs-keyword">as</span> record_count
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">1</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-number">1</span>, <span class="hljs-number">2</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=402 data-line-end=403 ><a id="56_Using_ORDER_BY_402"></a>5.6 Using ORDER BY</h3>
+<pre><code class="has-line-data" data-line-start="405" data-line-end="411" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>, <span class="hljs-keyword">count</span>(*) <span class="hljs-keyword">as</span> record_count
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">1</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=412 data-line-end=413 ><a id="57_Using_ORDER_BY_with_DESC_412"></a>5.7 Using ORDER BY with DESC</h3>
+<pre><code class="has-line-data" data-line-start="415" data-line-end="421" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>, <span class="hljs-keyword">count</span>(*) <span class="hljs-keyword">as</span> record_count
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">1</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span> <span class="hljs-keyword">DESC</span>, <span class="hljs-keyword">month</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=422 data-line-end=423 ><a id="58_Counting_nonnull_values_422"></a>5.8 Counting non-null values</h3>
+<pre><code class="has-line-data" data-line-start="425" data-line-end="428" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(snow_depth) <span class="hljs-keyword">as</span> recorded_snow_depth_count
+<span class="hljs-keyword">FROM</span> station_data
+</span></code></pre>
+<h3 class="code-line" data-line-start=429 data-line-end=430 ><a id="59_Average_temperature_by_month_since_year_2000_429"></a>5.9 Average temperature by month since year 2000</h3>
+<pre><code class="has-line-data" data-line-start="432" data-line-end="437" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">month</span>, <span class="hljs-keyword">AVG</span>(temperature) <span class="hljs-keyword">as</span> avg_temp
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">2000</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">month</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=438 data-line-end=439 ><a id="510_Average_temperature_with_rounding_by_month_since_year_2000_438"></a>5.10 Average temperature (with rounding) by month since year 2000</h3>
+<pre><code class="has-line-data" data-line-start="442" data-line-end="447" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">month</span>, <span class="hljs-keyword">round</span>(<span class="hljs-keyword">AVG</span>(temperature),<span class="hljs-number">2</span>) <span class="hljs-keyword">as</span> avg_temp
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">2000</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">month</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=448 data-line-end=449 ><a id="511_Sum_of_snow_depth_448"></a>5.11 Sum of snow depth</h3>
+<pre><code class="has-line-data" data-line-start="451" data-line-end="456" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">SUM</span>(snow_depth) <span class="hljs-keyword">as</span> total_snow
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">2005</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=457 data-line-end=458 ><a id="512_Multiple_aggregations_457"></a>5.12 Multiple aggregations</h3>
+<pre><code class="has-line-data" data-line-start="460" data-line-end="469" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>,
+<span class="hljs-keyword">SUM</span>(snow_depth) <span class="hljs-keyword">as</span> total_snow,
+<span class="hljs-keyword">SUM</span>(precipitation) <span class="hljs-keyword">as</span> total_precipitation,
+<span class="hljs-keyword">MAX</span>(precipitation) <span class="hljs-keyword">as</span> max_precipitation
+
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">2005</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=470 data-line-end=471 ><a id="EXERCISES_470"></a>EXERCISES</h3>
+<p class="has-line-data" data-line-start="471" data-line-end="472">Flip to slides</p>
+<h3 class="code-line" data-line-start=474 data-line-end=475 ><a id="513_Using_HAVING_474"></a>5.13 Using HAVING</h3>
+<p class="has-line-data" data-line-start="476" data-line-end="477">You cannot use WHERE on aggregations. This will result in an error.</p>
+<pre><code class="has-line-data" data-line-start="479" data-line-end="485" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>,
+<span class="hljs-keyword">SUM</span>(precipitation) <span class="hljs-keyword">as</span> total_precipitation
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> total_precipitation &gt; <span class="hljs-number">30</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="486" data-line-end="487">You can however, use HAVING.</p>
+<pre><code class="has-line-data" data-line-start="489" data-line-end="495" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>,
+<span class="hljs-keyword">SUM</span>(precipitation) <span class="hljs-keyword">as</span> total_precipitation
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>
+<span class="hljs-keyword">HAVING</span> total_precipitation &gt; <span class="hljs-number">30</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="496" data-line-end="497">Note that some platforms like Oracle do not support aliasing in GROUP BY and HAVING.</p>
+<p class="has-line-data" data-line-start="498" data-line-end="499">Therefore you have to rewrite the entire expression each time</p>
+<pre><code class="has-line-data" data-line-start="501" data-line-end="507" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>,
+<span class="hljs-keyword">SUM</span>(precipitation) <span class="hljs-keyword">as</span> total_precipitation
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>
+<span class="hljs-keyword">HAVING</span> <span class="hljs-keyword">SUM</span>(precipitation) &gt; <span class="hljs-number">30</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=509 data-line-end=510 ><a id="514_Getting_Distinct_values_509"></a>5.14 Getting Distinct values</h3>
+<p class="has-line-data" data-line-start="511" data-line-end="512">You can get DISTINCT values for one or more columns</p>
+<pre><code class="has-line-data" data-line-start="514" data-line-end="516" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> station_number <span class="hljs-keyword">FROM</span> station_data
+</span></code></pre>
+<p class="has-line-data" data-line-start="517" data-line-end="518">You can also get distinct combinations of values for multiple columns</p>
+<pre><code class="has-line-data" data-line-start="520" data-line-end="522" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> station_number, <span class="hljs-keyword">year</span> <span class="hljs-keyword">FROM</span> station_data
+</span></code></pre>
+<h3 class="code-line" data-line-start=523 data-line-end=524 ><a id="Exercise_523"></a>Exercise</h3>
+<pre><code class="has-line-data" data-line-start="526" data-line-end="535" class="language-sql"><span class="hljs-comment">-- Find the SUM of precipitation by year when a tornado was present, and sort by year descending.</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, 
+<span class="hljs-keyword">SUM</span>(precipitation) <span class="hljs-keyword">as</span> tornado_precipitation
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">1</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span> <span class="hljs-keyword">DESC</span>
+</span></code></pre>
+<pre><code class="has-line-data" data-line-start="537" data-line-end="545" class="language-sql"><span class="hljs-comment">-- SELECT the year and max snow depth, but only years where the max snow depth is at least 50.</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, 
+<span class="hljs-keyword">max</span>(snow_depth) <span class="hljs-keyword">AS</span> max_snow_depth
+<span class="hljs-keyword">FROM</span> STATION_DATA
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>
+<span class="hljs-keyword">HAVING</span> max_snow_depth &gt;= <span class="hljs-number">50</span>
+</span></code></pre>
+<h1 class="code-line" data-line-start=546 data-line-end=547 ><a id="Section_VI__CASE_Statements_546"></a>Section VI - CASE Statements</h1>
+<h3 class="code-line" data-line-start=548 data-line-end=549 ><a id="61_Categorizing_Wind_Speed_548"></a>6.1 Categorizing Wind Speed</h3>
+<p class="has-line-data" data-line-start="550" data-line-end="551">You can use a <code>CASE</code> statement to turn a column value into another value based on conditions. For instance, we can turn different <code>wind_speed</code> ranges into <code>HIGH</code>, <code>MODERATE</code>, and <code>LOW</code> categories.</p>
+<pre><code class="has-line-data" data-line-start="553" data-line-end="566" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> report_code, <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>, <span class="hljs-keyword">day</span>, wind_speed, 
+
+<span class="hljs-keyword">CASE</span> 
+    <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">40</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'HIGH'</span>
+    <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">30</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'MODERATE'</span>
+    <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'LOW'</span>
+    <span class="hljs-keyword">ELSE</span> <span class="hljs-string">'N/A'</span>
+<span class="hljs-keyword">END</span> <span class="hljs-keyword">AS</span> wind_severity
+
+<span class="hljs-keyword">FROM</span> station_data
+
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">by</span> wind_speed <span class="hljs-keyword">DESC</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=567 data-line-end=568 ><a id="62_More_Efficient_Way_To_Categorize_Wind_Speed_567"></a>6.2 More Efficient Way To Categorize Wind Speed</h3>
+<p class="has-line-data" data-line-start="569" data-line-end="570">We can actually omit <code>AND wind_speed &lt; 40</code> from the previous example because each <code>WHEN</code>/<code>THEN</code> is evaluated from top-to-bottom. The first one it finds to be true is the one it will go with, and stop evaluating subsequent conditions.</p>
+<pre><code class="has-line-data" data-line-start="572" data-line-end="582" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> report_code, <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>, <span class="hljs-keyword">day</span>, wind_speed,
+
+<span class="hljs-keyword">CASE</span>
+   <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">40</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'HIGH'</span>
+   <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">30</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'MODERATE'</span>
+   <span class="hljs-keyword">ELSE</span> <span class="hljs-string">'LOW'</span>
+<span class="hljs-keyword">END</span> <span class="hljs-keyword">as</span> wind_severity
+
+<span class="hljs-keyword">FROM</span> station_data
+</span></code></pre>
+<h3 class="code-line" data-line-start=583 data-line-end=584 ><a id="63_Using_CASE_with_GROUP_BY_583"></a>6.3 Using CASE with GROUP BY</h3>
+<p class="has-line-data" data-line-start="585" data-line-end="586">We can use <code>GROUP BY</code> in conjunction with a <code>CASE</code> statement to slice data in more ways, such as getting the record count by <code>wind_severity</code>.</p>
+<pre><code class="has-line-data" data-line-start="588" data-line-end="603" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> 
+
+<span class="hljs-keyword">CASE</span> 
+    <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">40</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'HIGH'</span>
+    <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">30</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'MODERATE'</span>
+    <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'LOW'</span>
+    <span class="hljs-keyword">ELSE</span> <span class="hljs-string">'N/A'</span>
+<span class="hljs-keyword">END</span> <span class="hljs-keyword">AS</span> wind_severity,
+
+<span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> record_count
+
+<span class="hljs-keyword">FROM</span> station_data
+
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> wind_severity
+</span></code></pre>
+<p class="has-line-data" data-line-start="604" data-line-end="605">Also, some wind_speed values are NULL, so without an <code>ELSE</code> any records that do not meet a condition will turn out to be NULL.</p>
+<pre><code class="has-line-data" data-line-start="607" data-line-end="621" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span>
+
+<span class="hljs-keyword">CASE</span>
+    <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">40</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'HIGH'</span>
+    <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">30</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'MODERATE'</span>
+    <span class="hljs-keyword">WHEN</span> wind_speed &gt;= <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'LOW'</span>
+<span class="hljs-keyword">END</span> <span class="hljs-keyword">AS</span> wind_severity,
+
+<span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> record_count
+
+<span class="hljs-keyword">FROM</span> station_data
+
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> wind_severity
+</span></code></pre>
+<h3 class="code-line" data-line-start=622 data-line-end=623 ><a id="64_ZeroNull_Case_Trick_622"></a>6.4 “Zero/Null” Case Trick</h3>
+<p class="has-line-data" data-line-start="624" data-line-end="625">There is really no way to create multiple aggregations with different conditions unless you know a trick with the <code>CASE</code> statement. If you want to find two total precipitation, with and without tornado precipitations, for each year and month, you have to do separate queries.</p>
+<p class="has-line-data" data-line-start="626" data-line-end="627"><strong>Tornado Precipitation</strong></p>
+<pre><code class="has-line-data" data-line-start="628" data-line-end="635" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>,
+<span class="hljs-keyword">SUM</span>(precipitation) <span class="hljs-keyword">as</span> tornado_precipitation
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">1</span>
+<span class="hljs-keyword">AND</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">1990</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="636" data-line-end="637"><strong>Non-Tornado Precipitation</strong></p>
+<pre><code class="has-line-data" data-line-start="638" data-line-end="645" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>,
+<span class="hljs-keyword">SUM</span>(precipitation) <span class="hljs-keyword">as</span> non_tornado_precipitation
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">0</span>
+<span class="hljs-keyword">AND</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">1990</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="646" data-line-end="647">But you can use a single query using a <code>CASE</code> statement that sets a value to 0 if the condition is not met. That way it will not impact the sum.</p>
+<pre><code class="has-line-data" data-line-start="649" data-line-end="658" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>,
+<span class="hljs-keyword">SUM</span>(<span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> tornado = <span class="hljs-number">1</span> <span class="hljs-keyword">THEN</span> precipitation <span class="hljs-keyword">ELSE</span> <span class="hljs-number">0</span> <span class="hljs-keyword">END</span>) <span class="hljs-keyword">as</span> tornado_precipitation,
+<span class="hljs-keyword">SUM</span>(<span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> tornado = <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> precipitation <span class="hljs-keyword">ELSE</span> <span class="hljs-number">0</span> <span class="hljs-keyword">END</span>) <span class="hljs-keyword">as</span> non_tornado_precipitation
+
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">1990</span>
+
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="659" data-line-end="660">Many folks who are not aware of the zero/null case trick will resort to derived tables (not covered in this class but covered in <em>Advanced SQL for Data Analysis</em>), which adds an unnecessary amount of effort and mess.</p>
+<pre><code class="has-line-data" data-line-start="662" data-line-end="687" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">t</span>.<span class="hljs-keyword">year</span>,
+<span class="hljs-keyword">t</span>.<span class="hljs-keyword">month</span>,
+<span class="hljs-keyword">t</span>.tornado_precipitation,
+non_t.non_tornado_precipitation
+
+<span class="hljs-keyword">FROM</span> (
+    <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>,
+    <span class="hljs-keyword">SUM</span>(precipitation) <span class="hljs-keyword">as</span> tornado_precipitation
+    <span class="hljs-keyword">FROM</span> station_data
+    <span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">AND</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">1990</span>
+    <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>
+) <span class="hljs-keyword">t</span>
+
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span>
+
+(
+    <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>,
+    <span class="hljs-keyword">SUM</span>(precipitation) <span class="hljs-keyword">as</span> non_tornado_precipitation
+    <span class="hljs-keyword">FROM</span> station_data
+    <span class="hljs-keyword">WHERE</span> tornado = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">AND</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">1990</span>
+    <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>, <span class="hljs-keyword">month</span>
+) non_t
+</span></code></pre>
+<h3 class="code-line" data-line-start=689 data-line-end=690 ><a id="65_Using_Null_in_a_CASE_to_conditionalize_MINMAX_689"></a>6.5 Using Null in a CASE to conditionalize MIN/MAX</h3>
+<p class="has-line-data" data-line-start="691" data-line-end="692">Since <code>NULL</code> is ignored in SUM, MIN, MAX, and other aggregate functions, you can use it in a <code>CASE</code> statement to conditionally control whether or not a value should be included in that aggregation.</p>
+<p class="has-line-data" data-line-start="693" data-line-end="694">For instance, we can split up max precipitation when a tornado was present vs not present.</p>
+<pre><code class="has-line-data" data-line-start="696" data-line-end="703" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>,
+<span class="hljs-keyword">MAX</span>(<span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> tornado = <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> precipitation <span class="hljs-keyword">ELSE</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">END</span>) <span class="hljs-keyword">as</span> max_non_tornado_precipitation,
+<span class="hljs-keyword">MAX</span>(<span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> tornado = <span class="hljs-number">1</span> <span class="hljs-keyword">THEN</span> precipitation <span class="hljs-keyword">ELSE</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">END</span>) <span class="hljs-keyword">as</span> max_tornado_precipitation
+<span class="hljs-keyword">FROM</span> station_data
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">year</span> &gt;= <span class="hljs-number">1990</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">year</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="704" data-line-end="705"><em>Switch to slides for exercise</em></p>
+<h3 class="code-line" data-line-start=707 data-line-end=708 ><a id="Exercise_61_707"></a>Exercise 6.1</h3>
+<p class="has-line-data" data-line-start="709" data-line-end="710">SELECT  the report_code, year, quarter, and temperature, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively.</p>
+<p class="has-line-data" data-line-start="711" data-line-end="712"><strong>ANSWER:</strong></p>
+<pre><code class="has-line-data" data-line-start="714" data-line-end="730" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span>
+
+report_code,
+<span class="hljs-keyword">year</span>,
+
+<span class="hljs-keyword">CASE</span>
+    <span class="hljs-keyword">WHEN</span> <span class="hljs-keyword">month</span> <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <span class="hljs-number">3</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'Q1'</span>
+    <span class="hljs-keyword">WHEN</span> <span class="hljs-keyword">month</span> <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">4</span> <span class="hljs-keyword">and</span> <span class="hljs-number">6</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'Q2'</span>
+    <span class="hljs-keyword">WHEN</span> <span class="hljs-keyword">month</span> <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">7</span> <span class="hljs-keyword">and</span> <span class="hljs-number">9</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'Q3'</span>
+    <span class="hljs-keyword">WHEN</span> <span class="hljs-keyword">month</span> <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">10</span> <span class="hljs-keyword">and</span> <span class="hljs-number">12</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'Q4'</span>
+<span class="hljs-keyword">END</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">quarter</span>,
+
+temperature
+
+<span class="hljs-keyword">FROM</span> STATION_DATA
+</span></code></pre>
+<h3 class="code-line" data-line-start=731 data-line-end=732 ><a id="Exercise_62_731"></a>Exercise 6.2</h3>
+<p class="has-line-data" data-line-start="733" data-line-end="734">Get the average temperature by quarter and year, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively.</p>
+<p class="has-line-data" data-line-start="735" data-line-end="736"><strong>ANSWER</strong></p>
+<pre><code class="has-line-data" data-line-start="738" data-line-end="753" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span>
+<span class="hljs-keyword">year</span>,
+
+<span class="hljs-keyword">CASE</span>
+    <span class="hljs-keyword">WHEN</span> <span class="hljs-keyword">month</span> <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <span class="hljs-number">3</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'Q1'</span>
+    <span class="hljs-keyword">WHEN</span> <span class="hljs-keyword">month</span> <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">4</span> <span class="hljs-keyword">and</span> <span class="hljs-number">6</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'Q2'</span>
+    <span class="hljs-keyword">WHEN</span> <span class="hljs-keyword">month</span> <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">7</span> <span class="hljs-keyword">and</span> <span class="hljs-number">9</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'Q3'</span>
+    <span class="hljs-keyword">WHEN</span> <span class="hljs-keyword">month</span> <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">10</span> <span class="hljs-keyword">and</span> <span class="hljs-number">12</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'Q4'</span>
+<span class="hljs-keyword">END</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">quarter</span>,
+
+<span class="hljs-keyword">AVG</span>(temperature) <span class="hljs-keyword">as</span> avg_temp
+
+<span class="hljs-keyword">FROM</span> STATION_DATA
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>
+</span></code></pre>
+<h1 class="code-line" data-line-start=755 data-line-end=756 ><a id="Section_VII__JOIN_755"></a>Section VII - JOIN</h1>
+<h3 class="code-line" data-line-start=757 data-line-end=758 ><a id="71A_INNER_JOIN_757"></a>7.1A INNER JOIN</h3>
+<p class="has-line-data" data-line-start="759" data-line-end="760">(Refer to slides Section VII)</p>
+<p class="has-line-data" data-line-start="761" data-line-end="762">View customer address information with each order by joining tables <code>CUSTOMER</code> and <code>CUSTOMER_ORDER</code>.</p>
+<pre><code class="has-line-data" data-line-start="764" data-line-end="779" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> ORDER_ID,
+CUSTOMER.CUSTOMER_ID,
+ORDER_DATE,
+SHIP_DATE,
+<span class="hljs-keyword">NAME</span>,
+STREET_ADDRESS,
+CITY,
+STATE,
+ZIP,
+PRODUCT_ID,
+ORDER_QTY
+
+<span class="hljs-keyword">FROM</span> CUSTOMER <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> CUSTOMER_ORDER
+<span class="hljs-keyword">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+</span></code></pre>
+<p class="has-line-data" data-line-start="780" data-line-end="781">Joins allow us to keep stored data normalized and simple, but we can get more descriptive views of our data by using joins.</p>
+<p class="has-line-data" data-line-start="782" data-line-end="783">Notice how two customers are omitted since they don’t have any orders (refer to slides).</p>
+<h3 class="code-line" data-line-start=785 data-line-end=786 ><a id="72B_A_BAD_APPROACH_785"></a>7.2B A BAD APPROACH</h3>
+<p class="has-line-data" data-line-start="787" data-line-end="788">You may come across a style of joining where commas are used to select the needed tables, and a <code>WHERE</code> defines the join condition as shown below:</p>
+<pre><code class="has-line-data" data-line-start="790" data-line-end="805" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> ORDER_ID,
+CUSTOMER.CUSTOMER_ID,
+ORDER_DATE,
+SHIP_DATE,
+<span class="hljs-keyword">NAME</span>,
+STREET_ADDRESS,
+CITY,
+STATE,
+ZIP,
+PRODUCT_ID,
+ORDER_QTY
+
+<span class="hljs-keyword">FROM</span> CUSTOMER, CUSTOMER_ORDER
+<span class="hljs-keyword">WHERE</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+</span></code></pre>
+<p class="has-line-data" data-line-start="806" data-line-end="807">Do not use this approach no matter how much your colleagues use it (and educate them not to use it either). It is extremely inefficient as it will generate a cartesian product across both tables (every possible combination of records between both), and then filter it based on the WHERE. It does not work with <code>LEFT JOIN</code> either, which we will look at shortly.</p>
+<p class="has-line-data" data-line-start="808" data-line-end="809">Using the <code>INNER JOIN</code> with an <code>ON</code> condition avoids the cartesian product and is more efficient. Therefore, always use that approach.</p>
+<h3 class="code-line" data-line-start=810 data-line-end=811 ><a id="72_LEFT_OUTER_JOIN_810"></a>7.2 LEFT OUTER JOIN</h3>
+<p class="has-line-data" data-line-start="812" data-line-end="813">To include all customers, regardless of whether they have orders, you can use a left outer join via <code>LEFT JOIN</code> (refer to slides).</p>
+<p class="has-line-data" data-line-start="814" data-line-end="815">If any customers do not have any orders, they will get one record where the <code>CUSTOMER_ORDER</code> fields will be null.</p>
+<pre><code class="has-line-data" data-line-start="817" data-line-end="832" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> CUSTOMER.CUSTOMER_ID,
+<span class="hljs-keyword">NAME</span>,
+STREET_ADDRESS,
+CITY,
+STATE,
+ZIP,
+ORDER_DATE,
+SHIP_DATE,
+ORDER_ID,
+PRODUCT_ID,
+ORDER_QTY
+
+<span class="hljs-keyword">FROM</span> CUSTOMER <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> CUSTOMER_ORDER
+<span class="hljs-keyword">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+</span></code></pre>
+<h2 class="code-line" data-line-start=834 data-line-end=835 ><a id="73_Finding_Customers_with_No_Orders_834"></a>7.3 Finding Customers with No Orders</h2>
+<p class="has-line-data" data-line-start="836" data-line-end="837">With a left outer join, you can filter for NULL values on the <code>CUSTOMER_ORDER</code> table to find customers that have no orders.</p>
+<pre><code class="has-line-data" data-line-start="839" data-line-end="847" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> CUSTOMER.CUSTOMER_ID,
+<span class="hljs-keyword">NAME</span> <span class="hljs-keyword">AS</span> CUSTOMER_NAME
+
+<span class="hljs-keyword">FROM</span> CUSTOMER <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> CUSTOMER_ORDER
+<span class="hljs-keyword">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="hljs-keyword">WHERE</span> ORDER_ID <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="848" data-line-end="849">You can use a left outer join to find child records with no parent, or parent records with no children (e.g. a <code>CUSTOMER_ORDER</code> with no <code>CUSTOMER</code>, or a <code>CUSTOMER</code> with no <code>CUSTOMER_ORDER</code>s).</p>
+<h2 class="code-line" data-line-start=851 data-line-end=852 ><a id="74_Joining_Multiple_Tables_851"></a>7.4 Joining Multiple Tables</h2>
+<p class="has-line-data" data-line-start="853" data-line-end="854">Bring in <code>PRODUCT</code> to supply product information for each <code>CUSTOMER_ORDER</code>, on top of <code>CUSTOMER</code> information.</p>
+<pre><code class="has-line-data" data-line-start="856" data-line-end="874" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> ORDER_ID,
+CUSTOMER.CUSTOMER_ID,
+<span class="hljs-keyword">NAME</span> <span class="hljs-keyword">AS</span> CUSTOMER_NAME,
+STREET_ADDRESS,
+CITY,
+STATE,
+ZIP,
+ORDER_DATE,
+PRODUCT.PRODUCT_ID,
+DESCRIPTION,
+ORDER_QTY
+
+<span class="hljs-keyword">FROM</span> CUSTOMER <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> CUSTOMER_ORDER
+<span class="hljs-keyword">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> PRODUCT
+<span class="hljs-keyword">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID
+</span></code></pre>
+<h2 class="code-line" data-line-start=875 data-line-end=876 ><a id="77_Using_Expressions_with_JOINs_875"></a>7.7 Using Expressions with JOINs</h2>
+<p class="has-line-data" data-line-start="877" data-line-end="878">You can use expressions combining any fields on any of the joined tables. For instance, we can now get the total revenue for each customer.</p>
+<pre><code class="has-line-data" data-line-start="880" data-line-end="899" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> ORDER_ID,
+CUSTOMER.CUSTOMER_ID,
+<span class="hljs-keyword">NAME</span> <span class="hljs-keyword">AS</span> CUSTOMER_NAME,
+STREET_ADDRESS,
+CITY,
+STATE,
+ZIP,
+ORDER_DATE,
+PRODUCT.PRODUCT_ID,
+DESCRIPTION,
+ORDER_QTY,
+ORDER_QTY * PRICE <span class="hljs-keyword">as</span> REVENUE
+
+<span class="hljs-keyword">FROM</span> CUSTOMER <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> CUSTOMER_ORDER
+<span class="hljs-keyword">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> PRODUCT
+<span class="hljs-keyword">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID
+</span></code></pre>
+<h2 class="code-line" data-line-start=901 data-line-end=902 ><a id="76_Using_GROUP_BY_with_JOINs_901"></a>7.6 Using GROUP BY with JOINs</h2>
+<p class="has-line-data" data-line-start="903" data-line-end="904">You can use <code>GROUP BY</code> with a join. For instance, you can find the total revenue for each customer by leveraging all three joined tables, and aggregating the <code>REVENUE</code> expression we created earlier.</p>
+<pre><code class="has-line-data" data-line-start="906" data-line-end="919" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span>
+CUSTOMER.CUSTOMER_ID,
+<span class="hljs-keyword">NAME</span> <span class="hljs-keyword">AS</span> CUSTOMER_NAME,
+<span class="hljs-keyword">sum</span>(ORDER_QTY * PRICE) <span class="hljs-keyword">as</span> TOTAL_REVENUE
+
+<span class="hljs-keyword">FROM</span> CUSTOMER <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> CUSTOMER_ORDER
+<span class="hljs-keyword">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> PRODUCT
+<span class="hljs-keyword">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID
+
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="920" data-line-end="921">To see all customers even if they had no orders, use a <code>LEFT JOIN</code></p>
+<pre><code class="has-line-data" data-line-start="923" data-line-end="936" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span>
+CUSTOMER.CUSTOMER_ID,
+<span class="hljs-keyword">NAME</span> <span class="hljs-keyword">AS</span> CUSTOMER_NAME,
+<span class="hljs-keyword">sum</span>(ORDER_QTY * PRICE) <span class="hljs-keyword">as</span> TOTAL_REVENUE
+
+<span class="hljs-keyword">FROM</span> CUSTOMER <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> CUSTOMER_ORDER
+<span class="hljs-keyword">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> PRODUCT
+<span class="hljs-keyword">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID
+
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="937" data-line-end="938">You can also use a <code>coalesce()</code> function to turn null sums into zeros.</p>
+<pre><code class="has-line-data" data-line-start="940" data-line-end="953" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span>
+CUSTOMER.CUSTOMER_ID,
+<span class="hljs-keyword">NAME</span> <span class="hljs-keyword">AS</span> CUSTOMER_NAME,
+<span class="hljs-keyword">coalesce</span>(<span class="hljs-keyword">sum</span>(ORDER_QTY * PRICE), <span class="hljs-number">0</span>) <span class="hljs-keyword">as</span> TOTAL_REVENUE
+
+<span class="hljs-keyword">FROM</span> CUSTOMER <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> CUSTOMER_ORDER
+<span class="hljs-keyword">ON</span> CUSTOMER.CUSTOMER_ID = CUSTOMER_ORDER.CUSTOMER_ID
+
+<span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> PRODUCT
+<span class="hljs-keyword">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID
+
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>
+</span></code></pre>
+<h2 class="code-line" data-line-start=955 data-line-end=956 ><a id="Exercise_955"></a>Exercise</h2>
+<pre><code class="has-line-data" data-line-start="958" data-line-end="967" class="language-sql"><span class="hljs-comment">/*
+SELECT the ORDER_ID, ORDER_DATE, and DESCRIPTION (from PRODUCT)
+(hint, you will need to INNER JOIN CUSTOMER_ORDER and PRODUCT)
+*/</span>
+<span class="hljs-operator"><span class="hljs-keyword">SELECT</span> ORDER_ID, ORDER_DATE, DESCRIPTION
+
+<span class="hljs-keyword">FROM</span> CUSTOMER_ORDER <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> PRODUCT
+<span class="hljs-keyword">ON</span> CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID
+</span></code></pre>
+<pre><code class="has-line-data" data-line-start="969" data-line-end="981" class="language-sql"><span class="hljs-comment">/*
+Find the total revenue by product. Include the fields PRODUCT_ID, DESCRIPTION, and then the TOTAL_REVENUE.
+(Hint: you will need to join CUSTOMER_ORDER and PRODUCT. Then do a GROUP BY)
+*/</span>
+<span class="hljs-operator"><span class="hljs-keyword">SELECT</span> PRODUCT.PRODUCT_ID,
+DESCRIPTION,
+<span class="hljs-keyword">COALESCE</span>(<span class="hljs-keyword">SUM</span> (ORDER_QTY * PRICE), <span class="hljs-number">0</span>) <span class="hljs-keyword">AS</span> TOTAL_REVENUE
+
+<span class="hljs-keyword">FROM</span> PRODUCT <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> CUSTOMER_ORDER
+<span class="hljs-keyword">ON</span> PRODUCT.PRODUCT_ID = CUSTOMER_ORDER.PRODUCT_ID
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-number">1</span>, <span class="hljs-number">2</span>
+</span></code></pre>
+<h1 class="code-line" data-line-start=983 data-line-end=984 ><a id="Section_VIII__Database_Design_983"></a>Section VIII - Database Design</h1>
+<p class="has-line-data" data-line-start="985" data-line-end="986">Refer to slides for database design concepts</p>
+<p class="has-line-data" data-line-start="987" data-line-end="989">To view source code for SQL Injection Demo, here is the GitHub page:<br>
+<a href="https://github.com/thomasnield/sql-injection-demo">https://github.com/thomasnield/sql-injection-demo</a></p>
+<p class="has-line-data" data-line-start="991" data-line-end="992">To read about normalized forms (which we do not cover in favor of a more intuitive approach), you can read this article:</p>
+<p class="has-line-data" data-line-start="993" data-line-end="994"><a href="http://www.dummies.com/programming/sql/sql-first-second-and-third-normal-forms/">http://www.dummies.com/programming/sql/sql-first-second-and-third-normal-forms/</a></p>
+<h2 class="code-line" data-line-start=996 data-line-end=997 ><a id="71__Creating_a_Table_996"></a>7.1 - Creating a Table</h2>
+<p class="has-line-data" data-line-start="998" data-line-end="999">In SQLiteStudio, navigate to <em>Database</em> -&gt; <em>Add a Database</em> and click the green plus icon to create a new database. Choose a location and name it <code>surgetech_conference.db</code>.</p>
+<p class="has-line-data" data-line-start="1000" data-line-end="1001">Create the <code>COMPANY</code> table. To create a new table, use the SQLiteStudio wizard by right-clicking the <code>surgetech_conference</code> database and selecting <code>Create a table</code>. You can also just execute the following SQL.</p>
+<pre><code class="has-line-data" data-line-start="1003" data-line-end="1011" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> COMPANY (
+  COMPANY_ID <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span> AUTOINCREMENT,
+  <span class="hljs-keyword">NAME</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">30</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  DESCRIPTION <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">60</span>),
+  PRIMARY_CONTACT_ATTENDEE_ID <span class="hljs-built_in">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  FOREIGN <span class="hljs-keyword">KEY</span> (PRIMARY_CONTACT_ATTENDEE_ID) <span class="hljs-keyword">REFERENCES</span> ATTENDEE(ATTENDEE_ID)
+);</span>
+</code></pre>
+<p class="has-line-data" data-line-start="1012" data-line-end="1013">After each field declaration, we create “rules” for that field. For example, <code>COMPANY_ID</code> must be an <code>INTEGER</code>, it is a <code>PRIMARY KEY</code>, and it will <code>AUTOINCREMENT</code> to automatically generate a consecutive integer ID for each new record. The <code>NAME</code> field holds text because it is <code>VARCHAR</code> (a variable number of characters), and it is limited to 30 characters and cannot be <code>NULL</code>.</p>
+<p class="has-line-data" data-line-start="1014" data-line-end="1015">Lastly, we declare any <code>FOREIGN KEY</code> constraints, specifying which field is a <code>FOREIGN KEY</code> and what <code>PRIMARY KEY</code> it references. In this example, <code>PRIMARY_CONTACT_ATTENDEE_ID</code> “references” the <code>ATTENDEE_ID</code> in the <code>ATTENDEE</code> table, and it can only be those values.</p>
+<h2 class="code-line" data-line-start=1016 data-line-end=1017 ><a id="72__Creating_the_other_tables_1016"></a>7.2 - Creating the other tables</h2>
+<p class="has-line-data" data-line-start="1018" data-line-end="1019">Create the other tables using the SQLiteStudio <em>New table</em> wizard, or just executing the following SQL code.</p>
+<pre><code class="has-line-data" data-line-start="1021" data-line-end="1054" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> ROOM (
+  ROOM_ID <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span> AUTOINCREMENT,
+  FLOOR_NUMBER <span class="hljs-built_in">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  SEAT_CAPACITY <span class="hljs-built_in">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+);</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> PRESENTATION (
+  PRESENTATION_ID <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span> AUTOINCREMENT,
+  BOOKED_COMPANY_ID <span class="hljs-built_in">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  BOOKED_ROOM_ID <span class="hljs-built_in">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  START_TIME <span class="hljs-keyword">TIME</span>,
+  END_TIME <span class="hljs-keyword">TIME</span>,
+  FOREIGN <span class="hljs-keyword">KEY</span> (BOOKED_COMPANY_ID) <span class="hljs-keyword">REFERENCES</span> COMPANY(COMPANY_ID)
+  FOREIGN <span class="hljs-keyword">KEY</span> (BOOKED_ROOM_ID) <span class="hljs-keyword">REFERENCES</span> ROOM(ROOM_ID)
+);</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> ATTENDEE (
+   ATTENDEE_ID <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span> AUTOINCREMENT,
+   FIRST_NAME <span class="hljs-built_in">VARCHAR</span> (<span class="hljs-number">30</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+   LAST_NAME <span class="hljs-built_in">VARCHAR</span> (<span class="hljs-number">30</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+   PHONE <span class="hljs-built_in">INTEGER</span>,
+   EMAIL <span class="hljs-built_in">VARCHAR</span> (<span class="hljs-number">30</span>),
+   VIP <span class="hljs-built_in">BOOLEAN</span> <span class="hljs-keyword">DEFAULT</span> (<span class="hljs-number">0</span>)
+);</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> PRESENTATION_ATTENDANCE (
+  TICKET_ID <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span> AUTOINCREMENT,
+  PRESENTATION_ID <span class="hljs-built_in">INTEGER</span>,
+  ATTENDEE_ID <span class="hljs-built_in">INTEGER</span>,
+  FOREIGN <span class="hljs-keyword">KEY</span> (PRESENTATION_ID) <span class="hljs-keyword">REFERENCES</span> PRESENTATION(PRESENTATION_ID)
+  FOREIGN <span class="hljs-keyword">KEY</span> (ATTENDEE_ID) <span class="hljs-keyword">REFERENCES</span> ATTENDEE(ATTENDEE_ID)
+);</span>
+</code></pre>
+<h2 class="code-line" data-line-start=1055 data-line-end=1056 ><a id="Creating_Views_1055"></a>Creating Views</h2>
+<p class="has-line-data" data-line-start="1057" data-line-end="1058">It is not uncommon to save <code>SELECT</code> queries that are used frequently into a database. These are known as <strong>Views</strong> and act very similarly to tables. You can essentially save a <code>SELECT</code> query and work with it just like a table.</p>
+<p class="has-line-data" data-line-start="1059" data-line-end="1060">For instance, say we wanted to save this SQL query that includes <code>ROOM</code> and <code>COMPANY</code> info with each <code>PRESENTATION</code> record.</p>
+<pre><code class="has-line-data" data-line-start="1062" data-line-end="1076" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> COMPANY.<span class="hljs-keyword">NAME</span> <span class="hljs-keyword">as</span> BOOKED_COMPANY,
+ROOM.ROOM_ID <span class="hljs-keyword">as</span> ROOM_NUMBER,
+ROOM.FLOOR_NUMBER <span class="hljs-keyword">as</span> <span class="hljs-keyword">FLOOR</span>,
+ROOM.SEAT_CAPACITY <span class="hljs-keyword">as</span> SEATS,
+START_TIME, END_TIME
+
+<span class="hljs-keyword">FROM</span> PRESENTATION
+
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> COMPANY
+<span class="hljs-keyword">ON</span> PRESENTATION.BOOKED_COMPANY_ID = COMPANY.COMPANY_ID
+
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> ROOM
+<span class="hljs-keyword">ON</span> PRESENTATION.BOOKED_ROOM_ID = ROOM.ROOM_ID
+</span></code></pre>
+<p class="has-line-data" data-line-start="1077" data-line-end="1078">You can save this as a view by right-clicking <em>Views</em> in the database navigator, and then <em>Create a view</em>. You can then paste the SQL as the body and give the view a name, such as <code>PRESENTATION_VW</code> (where “VW” means “View”).</p>
+<p class="has-line-data" data-line-start="1079" data-line-end="1080">You can also just execute the following SQL syntax: <code>CREATE [view name] AS [a SELECT query]</code>. For this example, this is what it would look like.</p>
+<pre><code class="has-line-data" data-line-start="1082" data-line-end="1098" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> PRESENTATION_VW <span class="hljs-keyword">AS</span>
+
+<span class="hljs-keyword">SELECT</span> COMPANY.<span class="hljs-keyword">NAME</span> <span class="hljs-keyword">as</span> BOOKED_COMPANY,
+ROOM.ROOM_ID <span class="hljs-keyword">as</span> ROOM_NUMBER,
+ROOM.FLOOR_NUMBER <span class="hljs-keyword">as</span> <span class="hljs-keyword">FLOOR</span>,
+ROOM.SEAT_CAPACITY <span class="hljs-keyword">as</span> SEATS,
+START_TIME, END_TIME
+
+<span class="hljs-keyword">FROM</span> PRESENTATION
+
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> COMPANY
+<span class="hljs-keyword">ON</span> PRESENTATION.BOOKED_COMPANY_ID = COMPANY.COMPANY_ID
+
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> ROOM
+<span class="hljs-keyword">ON</span> PRESENTATION.BOOKED_ROOM_ID = ROOM.ROOM_ID
+</span></code></pre>
+<p class="has-line-data" data-line-start="1099" data-line-end="1100">You will then see the <code>PRESENTATION_VW</code> in your database navigator, and you can query it just like a table.</p>
+<pre><code class="has-line-data" data-line-start="1102" data-line-end="1105" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> PRESENTATION_VW
+<span class="hljs-keyword">WHERE</span> SEATS &gt;= <span class="hljs-number">30</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="1106" data-line-end="1107">Obviously, there is no data yet so you will not get any results. But there will be once you populate data into this database.</p>
+<h1 class="code-line" data-line-start=1108 data-line-end=1109 ><a id="Section_IX__Writing_Data_1108"></a>Section IX - Writing Data</h1>
+<p class="has-line-data" data-line-start="1110" data-line-end="1111">In this section, we will learn how to write, modify, and delete data in a database.</p>
+<h2 class="code-line" data-line-start=1113 data-line-end=1114 ><a id="91_Using_INSERT_1113"></a>9.1 Using <code>INSERT</code></h2>
+<p class="has-line-data" data-line-start="1115" data-line-end="1116">To create a new record in a table, use the <code>INSERT</code> command and supply the values for the needed columns.</p>
+<p class="has-line-data" data-line-start="1117" data-line-end="1118">Put yourself into the <code>ATTENDEE</code> table.</p>
+<pre><code class="has-line-data" data-line-start="1120" data-line-end="1123" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> ATTENDEE (FIRST_NAME, LAST_NAME)
+<span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'Thomas'</span>,<span class="hljs-string">'Nield'</span>)
+</span></code></pre>
+<p class="has-line-data" data-line-start="1124" data-line-end="1125">Notice above that we declare the table we are writing to, which is <code>ATTENDEE</code>. Then we declare the columns we are supplying values for <code>(FIRST_NAME, LAST_NAME)</code>, followed by the values for this new record <code>('Thomas','Nield')</code>.</p>
+<p class="has-line-data" data-line-start="1126" data-line-end="1127">Notice we did not have to supply a value for <code>ATTENDEE_ID</code> as we have set it in the previous section to generate its own value. <code>PHONE</code>, <code>EMAIL</code>, and <code>VIP</code> fields have default values or are nullable, and therefore optional.</p>
+<h2 class="code-line" data-line-start=1129 data-line-end=1130 ><a id="92_Multiple_INSERT_records_1129"></a>9.2 Multiple <code>INSERT</code> records</h2>
+<p class="has-line-data" data-line-start="1131" data-line-end="1132">You can insert multiple rows in an <code>INSERT</code>. This will add three people to the <code>ATTENDEE</code> table.</p>
+<pre><code class="has-line-data" data-line-start="1134" data-line-end="1139" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> ATTENDEE (FIRST_NAME, LAST_NAME, PHONE, EMAIL, VIP)
+<span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'Jon'</span>, <span class="hljs-string">'Skeeter'</span>, <span class="hljs-number">4802185842</span>,<span class="hljs-string">'john.skeeter@rex.net'</span>, <span class="hljs-number">1</span>),
+  (<span class="hljs-string">'Sam'</span>,<span class="hljs-string">'Scala'</span>, <span class="hljs-number">2156783401</span>,<span class="hljs-string">'sam.scala@gmail.com'</span>, <span class="hljs-number">0</span>),
+  (<span class="hljs-string">'Brittany'</span>,<span class="hljs-string">'Fisher'</span>, <span class="hljs-number">5932857296</span>,<span class="hljs-string">'brittany.fisher@outlook.com'</span>, <span class="hljs-number">0</span>)
+</span></code></pre>
+<h2 class="code-line" data-line-start=1140 data-line-end=1141 ><a id="93_Testing_the_foreign_keys_1140"></a>9.3 Testing the foreign keys</h2>
+<p class="has-line-data" data-line-start="1142" data-line-end="1143">Let’s test our design and make sure our primary/foreign keys are working.</p>
+<p class="has-line-data" data-line-start="1144" data-line-end="1145">Try to <code>INSERT</code> a <code>COMPANY</code> with a <code>PRIMARY_CONTACT_ATTENDEE_ID</code> that does not exist in the <code>ATTENDEE</code> table.</p>
+<pre><code class="has-line-data" data-line-start="1147" data-line-end="1150" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> COMPANY (<span class="hljs-keyword">NAME</span>, DESCRIPTION, PRIMARY_CONTACT_ATTENDEE_ID)
+<span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'RexApp Solutions'</span>,<span class="hljs-string">'A mobile app delivery service'</span>, <span class="hljs-number">5</span>)
+</span></code></pre>
+<p class="has-line-data" data-line-start="1151" data-line-end="1152">Currently, there is no <code>ATTENDEE</code> with an <code>ATTENDEE_ID</code> of 5, this should error out which is good. It means we kept bad data out.</p>
+<p class="has-line-data" data-line-start="1153" data-line-end="1154">If you use an <code>ATTENDEE_ID</code> value that does exist and supply it as a <code>PRIMARY_CONTACT_ATTENDEE_ID</code>, we should be good to go.</p>
+<pre><code class="has-line-data" data-line-start="1156" data-line-end="1159" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> COMPANY (<span class="hljs-keyword">NAME</span>, DESCRIPTION, PRIMARY_CONTACT_ATTENDEE_ID)
+<span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'RexApp Solutions'</span>, <span class="hljs-string">'A mobile app delivery service'</span>, <span class="hljs-number">3</span>)
+</span></code></pre>
+<h3 class="code-line" data-line-start=1160 data-line-end=1161 ><a id="93_DELETE_records_1160"></a>9.3 <code>DELETE</code> records</h3>
+<p class="has-line-data" data-line-start="1162" data-line-end="1163">The <code>DELETE</code> command is dangerously simple. To delete records from both the <code>COMPANY</code> and <code>ATTENDEE</code> tables, execute the following SQL commands.</p>
+<pre><code class="has-line-data" data-line-start="1165" data-line-end="1168" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> COMPANY;</span>
+<span class="hljs-operator"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> ATTENDEE;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="1169" data-line-end="1170">Note that the <code>COMPANY</code> table has a foreign key relationship with the <code>ATTENDEE</code> table. Therefore we will have to delete records from <code>COMPANY</code> first before it allows us to delete data from <code>ATTENDEE</code>. Otherwise we will get a “FOREIGN KEY constraint failed effort” due to the <code>COMPANY</code> record we just added which is tied to the <code>ATTENDEE</code> with the <code>ATTENDEE_ID</code> of 3.</p>
+<p class="has-line-data" data-line-start="1171" data-line-end="1172">You can also use a <code>WHERE</code> to only delete records that meet a conditional. To delete all <code>ATTENDEE</code> records with no <code>PHONE</code> or <code>EMAIL</code>, you can run this command.</p>
+<pre><code class="has-line-data" data-line-start="1174" data-line-end="1177" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> ATTENDEE
+<span class="hljs-keyword">WHERE</span> PHONE <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">AND</span> EMAIL <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="1178" data-line-end="1179">A good practice is to use a <code>SELECT *</code> in place of the <code>DELETE</code> first. That way you can get a preview of what records will be deleted with that <code>WHERE</code> condition.</p>
+<pre><code class="has-line-data" data-line-start="1182" data-line-end="1185" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> ATTENDEE
+<span class="hljs-keyword">WHERE</span> PHONE <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">AND</span> EMAIL <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span>
+</span></code></pre>
+<h3 class="code-line" data-line-start=1186 data-line-end=1187 ><a id="UPDATE_records_1186"></a><code>UPDATE</code> records</h3>
+<p class="has-line-data" data-line-start="1188" data-line-end="1189">Say we wanted to change the phone number for the <code>ATTENDEE</code> with the <code>ATTENDEE_ID</code> value of 3, which is Sam Scala. We can do this with an <code>UPDATE</code> statement.</p>
+<pre><code class="has-line-data" data-line-start="1191" data-line-end="1194" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">UPDATE</span> ATTENDEE <span class="hljs-keyword">SET</span> PHONE = <span class="hljs-number">4802735872</span>
+<span class="hljs-keyword">WHERE</span> ATTENDEE_ID = <span class="hljs-number">3</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="1195" data-line-end="1196">Using a <code>WHERE</code> is important, otherwise it will update all records with the specified <code>SET</code> assignment. This can be handy if you wanted to say, make all <code>EMAIL</code> values uppercase.</p>
+<pre><code class="has-line-data" data-line-start="1198" data-line-end="1200" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">UPDATE</span> ATTENDEE <span class="hljs-keyword">SET</span> EMAIL = <span class="hljs-keyword">UPPER</span>(EMAIL)
+</span></code></pre>
+<h3 class="code-line" data-line-start=1201 data-line-end=1202 ><a id="94_Dropping_Tables_1201"></a>9.4 Dropping Tables</h3>
+<p class="has-line-data" data-line-start="1203" data-line-end="1204">If you want to delete a table, it also is dangerously simple. Be very careful and sure before you delete any table, because it will remove it permanently.</p>
+<pre><code class="has-line-data" data-line-start="1206" data-line-end="1208" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> MY_UNWANTED_TABLE
+</span></code></pre>
+<h3 class="code-line" data-line-start=1209 data-line-end=1210 ><a id="95_Transactions_1209"></a>9.5 Transactions</h3>
+<p class="has-line-data" data-line-start="1211" data-line-end="1212">Transactions are helpful when you want a series of writes to succeed.</p>
+<p class="has-line-data" data-line-start="1214" data-line-end="1215">Below, we execute two successful write operations within a transaction.</p>
+<pre><code class="has-line-data" data-line-start="1217" data-line-end="1224" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">BEGIN</span> <span class="hljs-keyword">TRANSACTION</span>;</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> ROOM (FLOOR_NUMBER, SEAT_CAPACITY) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">9</span>, <span class="hljs-number">80</span>);</span>
+<span class="hljs-operator"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> ROOM (FLOOR_NUMBER, SEAT_CAPACITY) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">10</span>, <span class="hljs-number">110</span>);</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">END</span> <span class="hljs-keyword">TRANSACTION</span>;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="1225" data-line-end="1226">But if we ever encountered a failure with our write operations, we can call <code>ROLLBACK</code> instead of <code>END TRANSACTION</code> to go back to the database state when <code>BEGIN TRANSACTION</code> was called.</p>
+<p class="has-line-data" data-line-start="1227" data-line-end="1228">Below, we have a failed operation due to a broken <code>INSERT</code>.</p>
+<pre><code class="has-line-data" data-line-start="1230" data-line-end="1235" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">BEGIN</span> <span class="hljs-keyword">TRANSACTION</span>;</span>
+
+<span class="hljs-operator"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> ROOM (FLOOR_NUMBER, SEAT_CAPACITY) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">12</span>, <span class="hljs-number">210</span>);</span>
+<span class="hljs-operator"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> ROOM (FLOOR_NUMBER, SEAT_CAPACITY) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">13</span>);</span> <span class="hljs-comment">--failure</span>
+</code></pre>
+<p class="has-line-data" data-line-start="1236" data-line-end="1237">So we can call <code>ROLLBACK</code> to “rewind” to the database state when <code>BEGIN TRANSACTION</code> was called.</p>
+<pre><code class="has-line-data" data-line-start="1239" data-line-end="1241" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">ROLLBACK</span>;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=1242 data-line-end=1243 ><a id="96_Creating_Indexes_1242"></a>9.6 Creating Indexes</h3>
+<p class="has-line-data" data-line-start="1244" data-line-end="1245">You can create an index on a certain column to speed up SELECT performance, such as the <code>EMAIL</code> column on the <code>ATTENDEE</code> table.</p>
+<pre><code class="has-line-data" data-line-start="1247" data-line-end="1249" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> email_index <span class="hljs-keyword">ON</span> ATTENDEE(EMAIL);</span>
+</code></pre>
+<p class="has-line-data" data-line-start="1250" data-line-end="1251">You can also create an index for a column that has unique values, and it will make a special optimization for that case.</p>
+<pre><code class="has-line-data" data-line-start="1253" data-line-end="1255" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">INDEX</span> email_index <span class="hljs-keyword">ON</span> ATTENDEE(EMAIL);</span>
+</code></pre>
+<p class="has-line-data" data-line-start="1256" data-line-end="1257">To remove an index, use the <code>DROP</code> command.</p>
+<pre><code class="has-line-data" data-line-start="1259" data-line-end="1261" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">INDEX</span> email_index;</span>
+</code></pre>
+<h3 class="code-line" data-line-start=1263 data-line-end=1264 ><a id="97_Working_with_Dates_and_Times_1263"></a>9.7 Working with Dates and Times</h3>
+<p class="has-line-data" data-line-start="1265" data-line-end="1266">Use the ISO ‘yyyy-mm-dd’ syntax with strings to treat them as dates easily.</p>
+<p class="has-line-data" data-line-start="1267" data-line-end="1268">Keep in mind much of this functionality is proprietary to SQLite. Make sure you learn the date and time functionality for your specific database platform.</p>
+<pre><code class="has-line-data" data-line-start="1270" data-line-end="1273" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> CUSTOMER_ORDER
+<span class="hljs-keyword">WHERE</span> SHIP_DATE &lt; <span class="hljs-string">'2015-05-21'</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="1274" data-line-end="1275">To get today’s date:</p>
+<pre><code class="has-line-data" data-line-start="1277" data-line-end="1279" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">DATE</span>(<span class="hljs-string">'now'</span>)
+</span></code></pre>
+<p class="has-line-data" data-line-start="1280" data-line-end="1281">To shift a date:</p>
+<pre><code class="has-line-data" data-line-start="1283" data-line-end="1286" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">DATE</span>(<span class="hljs-string">'now'</span>,<span class="hljs-string">'-1 day'</span>)
+<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">DATE</span>(<span class="hljs-string">'2015-12-07'</span>,<span class="hljs-string">'+3 month'</span>,<span class="hljs-string">'-1 day'</span>)
+</span></code></pre>
+<p class="has-line-data" data-line-start="1287" data-line-end="1288">To work with times, use <code>hh:mm:ss</code> format.</p>
+<pre><code class="has-line-data" data-line-start="1290" data-line-end="1292" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-string">'16:31'</span> &lt; <span class="hljs-string">'08:31'</span>
+</span></code></pre>
+<p class="has-line-data" data-line-start="1293" data-line-end="1294">To get today’s GMT time:</p>
+<pre><code class="has-line-data" data-line-start="1296" data-line-end="1298" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">TIME</span>(<span class="hljs-string">'now'</span>)
+</span></code></pre>
+<p class="has-line-data" data-line-start="1299" data-line-end="1300">To shift a time:</p>
+<pre><code class="has-line-data" data-line-start="1302" data-line-end="1304" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">TIME</span>(<span class="hljs-string">'16:31'</span>,<span class="hljs-string">'+1 minute'</span>)
+</span></code></pre>
+<p class="has-line-data" data-line-start="1305" data-line-end="1306">To merge a date and time, use a DateTime type.</p>
+<pre><code class="has-line-data" data-line-start="1308" data-line-end="1311" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-string">'2015-12-13 16:04:11'</span>
+<span class="hljs-keyword">SELECT</span> DATETIME(<span class="hljs-string">'2015-12-13 16:04:11'</span>,<span class="hljs-string">'-1 day'</span>,<span class="hljs-string">'+3 hour'</span>)
+</span></code></pre>
+<p class="has-line-data" data-line-start="1312" data-line-end="1313">To format dates and times a certain way:</p>
+<pre><code class="has-line-data" data-line-start="1315" data-line-end="1317" class="language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> strftime(<span class="hljs-string">'%d-%m-%Y'</span>, <span class="hljs-string">'now'</span>)
+</span></code></pre>
+<p class="has-line-data" data-line-start="1318" data-line-end="1320">Refer to SQLite documentation<br>
+<a href="http://www.sqlite.org/lang_datefunc.html">http://www.sqlite.org/lang_datefunc.html</a></p>
+<p class="has-line-data" data-line-start="1321" data-line-end="1323">Another helpful tutorial on using dates and times with SQLite.<br>
+<a href="https://www.tutorialspoint.com/sqlite/sqlite_date_time.htm">https://www.tutorialspoint.com/sqlite/sqlite_date_time.htm</a></p>
