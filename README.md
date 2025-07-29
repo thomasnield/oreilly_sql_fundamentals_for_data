@@ -31,7 +31,7 @@ Get a free 3 month license for JetBrains developer tools (including PyCharm, Dat
 
 [Silver Bullet Syndrome - Hadi Hariri](https://youtu.be/qamzvLfX-Zo?si=fClyuZepv5zxvjd9)
 
-[Silver Bullet Syndrome - Hadi Hariri](https://youtu.be/WN3CSOai_ZU?si=MkxCn92pfeXoSUD8)
+[Silver Bullet Syndrome Part II - Hadi Hariri](https://youtu.be/WN3CSOai_ZU?si=MkxCn92pfeXoSUD8)
 
 [Silver Bullet Syndrome 2025 - Hadi Hariri](https://youtu.be/TIu6rQVwTkM?si=953rhVOAjiOiR4Gv)
 
