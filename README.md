@@ -2,21 +2,14 @@
 
 Resources for O'Reilly "SQL Fundamentals for Data" online training
 
-Recommended SQLite Environments: 
+This is the Oracle version. 
 
-*SQLiteOnline*
-http://sqliteonline.com/
+# Environment Setup
 
-*SQLiteStudio*
-https://sqlitestudio.pl/features/
+Oracle provides a Live SQL Environment. 
+[https://livesql.oracle.com/](https://livesql.oracle.com/next/)
 
-# Open Databases Directly on SQliteOnline
-
-#### rexon_metals.db
-https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/databases/rexon_metals.db
-
-#### weather_stations.db
-https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/databases/weather_stations.db
+Just use the `initialize.sql` script to set up the database under `MY_SCHEMA`. 
 
 # Resources 
 
