@@ -35,6 +35,8 @@ Get a free 3 month license for JetBrains developer tools (including PyCharm, Dat
 
 [Silver Bullet Syndrome 2025 - Hadi Hariri](https://youtu.be/TIu6rQVwTkM?si=953rhVOAjiOiR4Gv)
 
+[This couple can’t do the simplest things online because their last name is ‘Null’](https://thenextweb.com/news/last-name-null-is-tough-for-computers)
+
 #### Other SQL and SQL-Related Resources
 
 [Other Online Trainings/Books by Thomas Nield](https://www.oreilly.com/pub/au/6658)
@@ -42,6 +44,8 @@ Get a free 3 month license for JetBrains developer tools (including PyCharm, Dat
 [Getting Started with SQL (O'Reilly Book)](https://learning.oreilly.com/library/view/getting-started-with/9781491938607/)
 
 ![](https://images-na.ssl-images-amazon.com/images/I/51A7fbsp0EL.jpg)
+
+[Using SQL with Python](https://learning.oreilly.com/course/using-sql-in/0642572107871/)
 
 [SQL Interactive Scenarios on O'Reilly](https://learning.oreilly.com/search/?q=thomas%20nield%20sql&type=cloud-scenario&type=sandbox&type=scenario)
 
@@ -52,8 +56,6 @@ Get a free 3 month license for JetBrains developer tools (including PyCharm, Dat
 [SQL with Python, R, and Java (Code Examples)](https://github.com/thomasnield/oreilly_programming_with_sql/tree/master/code)
 
 [Intermediate SQL (Code Examples)](https://github.com/thomasnield/oreilly_intermediate_sql_for_data/blob/master/intermediate_sql_class_notes.md) 
-
-[Anaconda Introduction to SQL (Using Python)](https://learning.anaconda.cloud/introduction-to-sql) 
 
 [An Introduction to Regular Expressions](https://learning.oreilly.com/library/view/an-introduction-to/9781492082569/) 
 
