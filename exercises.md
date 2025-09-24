@@ -128,7 +128,7 @@ ON CUSTOMER_ORDER.PRODUCT_ID = PRODUCT.PRODUCT_ID
 ```
 
 10) 
-```
+```sql
 /*
 Find the total revenue by product. Include the fields PRODUCT_ID, DESCRIPTION, and then the TOTAL_REVENUE.
 (Hint: you will need to join CUSTOMER_ORDER and PRODUCT. Then do a GROUP BY)
