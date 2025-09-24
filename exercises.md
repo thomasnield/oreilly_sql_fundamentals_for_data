@@ -1,6 +1,7 @@
 # Exercises
 
 Using station_data....
+
 1) SELECT all records where TEMPERATURE is between 30 and 50 degrees.
 2) SELECT all records where station_pressure is greater than 1000 and a tornado was present
 3) SELECT all records with report codes E6AED7, B950A1, 98DDAD
@@ -10,7 +11,8 @@ Using station_data....
 7) SELECT the report_code, year, quarter, and temperature, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively.
 8) Get the average temperature by quarter and year, where a “quarter” is “Q1”, “Q2”, “Q3”, or “Q4” reflecting months 1-3, 4-6, 7-9, and 10-12 respectively.
 
-Using rexon_metals.db
+Using rexon_metals.db...
+
 9) SELECT the ORDER_ID, ORDER_DATE, and DESCRIPTION (from PRODUCT) (hint, you will need to INNER JOIN CUSTOMER_ORDER and PRODUCT)
 10) Find the total revenue by product. Include the fields PRODUCT_ID, DESCRIPTION, and then the TOTAL_REVENUE.
 
