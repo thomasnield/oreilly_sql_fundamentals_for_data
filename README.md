@@ -29,6 +29,8 @@ Get a free 3 month license for JetBrains developer tools (including PyCharm, Dat
 
 [Asianometry - The History of Oracle](https://youtu.be/zSn8il5Mo5s?si=1G4lJ9Umb0xgopHd)
 
+[Big Data is Dead](https://motherduck.com/blog/big-data-is-dead/)
+
 [Silver Bullet Syndrome - Hadi Hariri](https://youtu.be/qamzvLfX-Zo?si=fClyuZepv5zxvjd9)
 
 [Silver Bullet Syndrome Part II - Hadi Hariri](https://youtu.be/WN3CSOai_ZU?si=MkxCn92pfeXoSUD8)
