@@ -41,6 +41,8 @@ Get a free 3 month license for JetBrains developer tools (including PyCharm, Dat
 
 #### Other SQL and SQL-Related Resources
 
+[Using SQL with Python (Video Course)](https://learning.oreilly.com/course/using-sql-in/0642572107871/)
+
 [Other Online Trainings/Books by Thomas Nield](https://www.oreilly.com/pub/au/6658)
 
 [Getting Started with SQL (O'Reilly Book)](https://learning.oreilly.com/library/view/getting-started-with/9781491938607/)
