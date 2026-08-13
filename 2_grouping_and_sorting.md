@@ -183,6 +183,16 @@ FROM WEATHER_MONITOR
 |<br>
 |<br>
 |<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
 v 
 
 ```sql
