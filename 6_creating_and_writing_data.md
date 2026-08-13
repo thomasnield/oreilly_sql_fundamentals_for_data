@@ -156,11 +156,7 @@ SELECT * FROM CUSTOMER_PAYMENT
 
 ## Transactions
 
-When you are making edits to a database, strongly consider doing so within a **transaction** which acts as a rewind button from the point a transaction is started. As a matter of fact, when you start making write operations like we did above, it already opened a transaction that has never been finalized. This means we need to `COMMIT` the changes we just made or else they will be lost the moment the database connection is closed. Let's commit those changes now.
-
-```sql
-COMMIT
-```
+When you are making edits to a database, strongly consider doing so within a **transaction** which acts as a rewind button from the point a transaction is started. 
 
 The reason for this is if anything goes wrong — whether an error, a power failure, a network error, or other mishaps occur — we need to restore the database at its last point of integrity.
 
