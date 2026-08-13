@@ -13,7 +13,7 @@ https://sqlitestudio.pl/features/
 # Open Databases Directly on SQliteOnline
 
 #### thunder_bird_manufacturing.db
-https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/thunder_bird_manufacturing.db
+https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/oreilly_sql_fundamentals_for_data/master/thunderbird_manufacturing.db
 
 # Resources 
 
