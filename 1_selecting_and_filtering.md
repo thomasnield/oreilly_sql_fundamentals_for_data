@@ -55,7 +55,7 @@ The mathematical operators you can expect in every SQL platform are as follows:
 
 Symbol  | Operation 
 -------------------|------------------
-+      | Adds two numbers
++ | Adds two numbers
 - | Subtracts two numbers
 * | Multiplies two numbers
 / | Divides two numbers
