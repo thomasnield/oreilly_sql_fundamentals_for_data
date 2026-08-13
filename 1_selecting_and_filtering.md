@@ -118,6 +118,16 @@ SELECT ? FROM ?;
 |<br>
 |<br>
 |<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
 v 
 
 ```sql
@@ -311,6 +321,16 @@ WHERE ?;
 ```
 
 ### SCROLL DOWN FOR ANSWER
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
 |<br>
 |<br>
 |<br>
