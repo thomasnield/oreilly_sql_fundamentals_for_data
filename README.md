@@ -17,22 +17,8 @@ https://sqliteonline.com/#urldb=https://raw.githubusercontent.com/thomasnield/or
 
 # Resources 
 
-#### JetBrains Promotion
-Get a free 3 month license for JetBrains developer tools (including PyCharm, DataGrip) using code 3min_datascience: https://www.jetbrains.com/all/
 
-#### Links Mentioned in Class
-
-[Asianometry - The History of SQL](https://youtu.be/z8L202FlmD4?si=ObwEtRU2ND0SNSG1)
-
-[Asianometry - The History of Oracle](https://youtu.be/zSn8il5Mo5s?si=1G4lJ9Umb0xgopHd)
-
-[Silver Bullet Syndrome - Hadi Hariri](https://youtu.be/qamzvLfX-Zo?si=fClyuZepv5zxvjd9)
-
-[Silver Bullet Syndrome Part II - Hadi Hariri](https://youtu.be/WN3CSOai_ZU?si=MkxCn92pfeXoSUD8)
-
-[Silver Bullet Syndrome 2025 - Hadi Hariri](https://youtu.be/TIu6rQVwTkM?si=953rhVOAjiOiR4Gv)
-
-#### Other SQL and SQL-Related Resources
+[Using SQL with Python (Video Course by Thomas Nield)](https://www.oreilly.com/videos/using-sql-in/0642572107871/) 
 
 [Other Online Trainings/Books by Thomas Nield](https://www.oreilly.com/pub/au/6658)
 
@@ -53,4 +39,17 @@ Get a free 3 month license for JetBrains developer tools (including PyCharm, Dat
 [An Introduction to Regular Expressions](https://learning.oreilly.com/library/view/an-introduction-to/9781492082569/) 
 
 [Regular Expressions Interactive Labs](https://learning.oreilly.com/search/?q=thomas%20nield%20regular%20expressions&type=sandbox&type=scenario&type=cloud-scenario&rows=100&language_with_transcripts=en)
+
+
+#### Links Mentioned in Class
+
+[Asianometry - The History of SQL](https://youtu.be/z8L202FlmD4?si=ObwEtRU2ND0SNSG1)
+
+[Asianometry - The History of Oracle](https://youtu.be/zSn8il5Mo5s?si=1G4lJ9Umb0xgopHd)
+
+[Silver Bullet Syndrome - Hadi Hariri](https://youtu.be/qamzvLfX-Zo?si=fClyuZepv5zxvjd9)
+
+[Silver Bullet Syndrome Part II - Hadi Hariri](https://youtu.be/WN3CSOai_ZU?si=MkxCn92pfeXoSUD8)
+
+[Silver Bullet Syndrome 2025 - Hadi Hariri](https://youtu.be/TIu6rQVwTkM?si=953rhVOAjiOiR4Gv)
 
