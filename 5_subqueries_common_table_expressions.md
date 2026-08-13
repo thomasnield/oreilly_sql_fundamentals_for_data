@@ -175,6 +175,16 @@ AND CUSTOMER_ORDER.PRODUCT_ID = min_max_quantity.PRODUCT_ID
 |<br>
 |<br>
 |<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
 v 
 
 
