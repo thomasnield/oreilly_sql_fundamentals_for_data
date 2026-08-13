@@ -321,6 +321,25 @@ Note if you want identical values to receive the same ranking, use the `RANK()` 
 
 For the month of March, bring in the rolling sum of quantity ordered (up to each `ORDER_DATE`) by `CUSTOMER_ID` and `PRODUCT_ID`.
 
+
+### SCROLL DOWN FOR ANSWER
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+v 
+
 ```sql
 SELECT CUSTOMER_ORDER_ID,
 ORDER_DATE,
