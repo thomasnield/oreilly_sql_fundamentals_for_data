@@ -50,8 +50,6 @@ Get a free 3 month license for JetBrains developer tools (including PyCharm, Dat
 
 [Intermediate SQL (Code Examples)](https://github.com/thomasnield/oreilly_intermediate_sql_for_data/blob/master/intermediate_sql_class_notes.md) 
 
-[Anaconda Introduction to SQL (Using Python)](https://learning.anaconda.cloud/introduction-to-sql) 
-
 [An Introduction to Regular Expressions](https://learning.oreilly.com/library/view/an-introduction-to/9781492082569/) 
 
 [Regular Expressions Interactive Labs](https://learning.oreilly.com/search/?q=thomas%20nield%20regular%20expressions&type=sandbox&type=scenario&type=cloud-scenario&rows=100&language_with_transcripts=en)
