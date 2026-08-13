@@ -483,6 +483,23 @@ GROUP BY 1, 2, 3, 4
 
 For every `CALENDAR_DATE` and `CUSTOMER_ID`, show the total `QUANTITY` ordered for the date range of `2021-01-01` to `2021-03-31`:
 
+### SCROLL DOWN FOR ANSWER
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+v 
 
 **ANSWER:**
 
