@@ -58,7 +58,7 @@ AND CUSTOMER_ORDER.PRODUCT_ID REGEXP DISCOUNT.PRODUCT_ID_REGEX
 AND PRODUCT.PRODUCT_GROUP REGEXP DISCOUNT.PRODUCT_GROUP_REGEX
 AND CUSTOMER.STATE REGEXP DISCOUNT.STATE_REGEX
 
-WHERE ORDER_DATE BETWEEN '2017-03-26' AND '2017-03-31'
+WHERE ORDER_DATE BETWEEN '2021-03-26' AND '2021-03-31'
 ```
 
 If you expect records to possibly get multiple discounts, then sum the discounts and `GROUP BY` everything else:
@@ -89,7 +89,7 @@ AND CUSTOMER_ORDER.PRODUCT_ID REGEXP DISCOUNT.PRODUCT_ID_REGEX
 AND PRODUCT.PRODUCT_GROUP REGEXP DISCOUNT.PRODUCT_GROUP_REGEX
 AND CUSTOMER.STATE REGEXP DISCOUNT.STATE_REGEX
 
-WHERE ORDER_DATE BETWEEN '2017-03-26' AND '2017-03-31'
+WHERE ORDER_DATE BETWEEN '2021-03-26' AND '2021-03-31'
 
 GROUP BY 1,2,3,4,5,6,7,8
 ```
@@ -115,7 +115,7 @@ ON o1.CUSTOMER_ID = o2.CUSTOMER_ID
 AND o1.PRODUCT_ID = o2.PRODUCT_ID
 AND o2.ORDER_DATE = date(o1.ORDER_DATE, '-1 day')
 
-WHERE o1.ORDER_DATE BETWEEN '2017-03-05' AND '2017-03-11'
+WHERE o1.ORDER_DATE BETWEEN '2021-03-05' AND '2021-03-11'
 ```
 
 Note if you want to get the previous quantity ordered for that record's given `CUSTOMER_ID` and `PRODUCT_ID`, even if it wasn't strictly the day before, you can use a subquery instead that qualifies previous dates and orders them descending. Then you can use `LIMIT 1` to grab the most recent at the top.
@@ -260,18 +260,18 @@ Generating integers can also be be helpful to "repeat-and-modify" records in a g
 
 | BOOKING_ID | BOOKED_EMPLOYEE_ID | DEPARTURE_DATE | ORIGIN | DESTINATION | FARE_PRICE | NUM_OF_PASSENGERS | RETURN_BOOKING_ID |
 |------------|--------------------|----------------|--------|-------------|------------|-------------------|-------------------|
-| 1          | 6                  | 2017-03-01     | DFW    | ORD         | 170        | 2                 | 2                 |
-| 2          | 6                  | 2017-03-04     | ORD    | DFW         | 160        | 2                 |                   |
-| 3          | 19                 | 2017-03-21     | DFW    | JFK         | 210        | 3                 | 4                 |
-| 4          | 19                 | 2017-03-24     | JFK    | DFW         | 220        | 3                 |                   |
-| 5          | 1                  | 2017-03-26     | DFW    | LAX         | 180        | 1                 | 6                 |
-| 6          | 1                  | 2017-03-27     | LAX    | DFW         | 190        | 1                 |                   |
-| 7          | 5                  | 2017-03-27     | DFW    | ORD         | 210        | 2                 | 8                 |
-| 8          | 5                  | 2017-03-29     | ORD    | DFW         | 190        | 2                 |                   |
-| 9          | 9                  | 2017-03-28     | DFW    | SFO         | 220        | 3                 | 10                |
-| 10         | 9                  | 2017-03-28     | SFO    | DFW         | 230        | 3                 |                   |
-| 11         | 31                 | 2017-04-01     | DFW    | LAX         | 190        | 1                 | 12                |
-| 12         | 31                 | 2017-04-05     | LAX    | DFW         | 180        | 1                 |                   |
+| 1          | 6                  | 2021-03-01     | DFW    | ORD         | 170        | 2                 | 2                 |
+| 2          | 6                  | 2021-03-04     | ORD    | DFW         | 160        | 2                 |                   |
+| 3          | 19                 | 2021-03-21     | DFW    | JFK         | 210        | 3                 | 4                 |
+| 4          | 19                 | 2021-03-24     | JFK    | DFW         | 220        | 3                 |                   |
+| 5          | 1                  | 2021-03-26     | DFW    | LAX         | 180        | 1                 | 6                 |
+| 6          | 1                  | 2021-03-27     | LAX    | DFW         | 190        | 1                 |                   |
+| 7          | 5                  | 2021-03-27     | DFW    | ORD         | 210        | 2                 | 8                 |
+| 8          | 5                  | 2021-03-29     | ORD    | DFW         | 190        | 2                 |                   |
+| 9          | 9                  | 2021-03-28     | DFW    | SFO         | 220        | 3                 | 10                |
+| 10         | 9                  | 2021-03-28     | SFO    | DFW         | 230        | 3                 |                   |
+| 11         | 31                 | 2021-04-01     | DFW    | LAX         | 190        | 1                 | 12                |
+| 12         | 31                 | 2021-04-05     | LAX    | DFW         | 180        | 1                 |                   |
 
 We can break up each booking into individual bookings for each passenger (e.g create 3 records off of a booking with 3 passengers). 
 
@@ -299,19 +299,19 @@ ON repeat_helper.x <= NUM_OF_PASSENGERS
 
 | BOOKING_ID | BOOKED_EMPLOYEE_ID | DEPARTURE_DATE | ORIGIN | DESTINATION | FARE_PRICE | PASSENGER_NUMBER |
 |------------|--------------------|----------------|--------|-------------|------------|------------------|
-| 1          | 6                  | 2017-03-01     | DFW    | ORD         | 170        | 1                |
-| 1          | 6                  | 2017-03-01     | DFW    | ORD         | 170        | 2                |
-| 2          | 6                  | 2017-03-04     | ORD    | DFW         | 160        | 1                |
-| 2          | 6                  | 2017-03-04     | ORD    | DFW         | 160        | 2                |
-| 3          | 19                 | 2017-03-21     | DFW    | JFK         | 210        | 1                |
-| 3          | 19                 | 2017-03-21     | DFW    | JFK         | 210        | 2                |
-| 3          | 19                 | 2017-03-21     | DFW    | JFK         | 210        | 3                |
-| 4          | 19                 | 2017-03-24     | JFK    | DFW         | 220        | 1                |
-| 4          | 19                 | 2017-03-24     | JFK    | DFW         | 220        | 2                |
-| 4          | 19                 | 2017-03-24     | JFK    | DFW         | 220        | 3                |
-| 5          | 1                  | 2017-03-26     | DFW    | LAX         | 180        | 1                |
-| 6          | 1                  | 2017-03-27     | LAX    | DFW         | 190        | 1                |
-| 7          | 5                  | 2017-03-27     | DFW    | ORD         | 210        | 1                |
+| 1          | 6                  | 2021-03-01     | DFW    | ORD         | 170        | 1                |
+| 1          | 6                  | 2021-03-01     | DFW    | ORD         | 170        | 2                |
+| 2          | 6                  | 2021-03-04     | ORD    | DFW         | 160        | 1                |
+| 2          | 6                  | 2021-03-04     | ORD    | DFW         | 160        | 2                |
+| 3          | 19                 | 2021-03-21     | DFW    | JFK         | 210        | 1                |
+| 3          | 19                 | 2021-03-21     | DFW    | JFK         | 210        | 2                |
+| 3          | 19                 | 2021-03-21     | DFW    | JFK         | 210        | 3                |
+| 4          | 19                 | 2021-03-24     | JFK    | DFW         | 220        | 1                |
+| 4          | 19                 | 2021-03-24     | JFK    | DFW         | 220        | 2                |
+| 4          | 19                 | 2021-03-24     | JFK    | DFW         | 220        | 3                |
+| 5          | 1                  | 2021-03-26     | DFW    | LAX         | 180        | 1                |
+| 6          | 1                  | 2021-03-27     | LAX    | DFW         | 190        | 1                |
+| 7          | 5                  | 2021-03-27     | DFW    | ORD         | 210        | 1                |
 
 You can also use some clever `CASE` expression logic with an integer generator to find total costs of sending employees to each airport. 
 
@@ -378,7 +378,7 @@ FROM CUSTOMER
 CROSS JOIN PRODUCT
 ```
 
-In this case we should bring in `CALENDAR_DATE` and cross join it with `PRODUCT_ID` to get every possible combination of calendar date and product. Note the `CALENDAR_DATE` comes from the `CALENDAR` table, which acts as a simple list of consecutive calendar dates. Note we could also have used a recursive query, as shown in the previous example, to generate the dates. We'll stick with a simple table instead for now in case you are not comfortable with recursion yet. We should only filter the calendar to a date range of interest, like `2017-01-01` and `2017-03-31`.
+In this case we should bring in `CALENDAR_DATE` and cross join it with `PRODUCT_ID` to get every possible combination of calendar date and product. Note the `CALENDAR_DATE` comes from the `CALENDAR` table, which acts as a simple list of consecutive calendar dates. Note we could also have used a recursive query, as shown in the previous example, to generate the dates. We'll stick with a simple table instead for now in case you are not comfortable with recursion yet. We should only filter the calendar to a date range of interest, like `2021-01-01` and `2021-03-31`.
 
 ```sql
 SELECT
@@ -386,7 +386,7 @@ CALENDAR_DATE,
 PRODUCT_ID
 FROM PRODUCT
 CROSS JOIN CALENDAR
-WHERE CALENDAR_DATE BETWEEN '2017-01-01' and '2017-03-31'
+WHERE CALENDAR_DATE BETWEEN '2021-01-01' and '2021-03-31'
 ```
 
 Then we can `LEFT JOIN` to our previous query to get every product quantity sold by calendar date, even if there were no orders that day:
@@ -403,7 +403,7 @@ FROM
   PRODUCT_ID
   FROM PRODUCT
   CROSS JOIN CALENDAR
-  WHERE CALENDAR_DATE BETWEEN '2017-01-01' and '2017-03-31'
+  WHERE CALENDAR_DATE BETWEEN '2021-01-01' and '2021-03-31'
 ) all_combos
 
 LEFT JOIN
@@ -432,7 +432,7 @@ WITH all_combos AS (
   PRODUCT_ID
   FROM PRODUCT
   CROSS JOIN CALENDAR
-  WHERE CALENDAR_DATE BETWEEN '2017-01-01' and '2017-03-31'
+  WHERE CALENDAR_DATE BETWEEN '2021-01-01' and '2021-03-31'
 ),
 
 totals AS (
@@ -481,7 +481,7 @@ GROUP BY 1, 2, 3, 4
 
 ## Exercise 
 
-For every `CALENDAR_DATE` and `CUSTOMER_ID`, show the total `QUANTITY` ordered for the date range of `2017-01-01` to `2017-03-31`:
+For every `CALENDAR_DATE` and `CUSTOMER_ID`, show the total `QUANTITY` ordered for the date range of `2021-01-01` to `2021-03-31`:
 
 
 **ANSWER:**
@@ -498,7 +498,7 @@ FROM
   CUSTOMER_ID
   FROM CUSTOMER
   CROSS JOIN CALENDAR
-  WHERE CALENDAR_DATE BETWEEN '2017-01-01' and '2017-03-31'
+  WHERE CALENDAR_DATE BETWEEN '2021-01-01' and '2021-03-31'
 ) all_combos
 
 LEFT JOIN
@@ -528,7 +528,7 @@ WITH all_combos AS (
   CUSTOMER_ID
   FROM CUSTOMER
   CROSS JOIN CALENDAR
-  WHERE CALENDAR_DATE BETWEEN '2017-01-01' and '2017-03-31'
+  WHERE CALENDAR_DATE BETWEEN '2021-01-01' and '2021-03-31'
 ),
 
 totals AS (
