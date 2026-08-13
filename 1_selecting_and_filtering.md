@@ -53,13 +53,13 @@ Note how SQL queries can be written across multiple lines for legibility.
 
 The mathematical operators you can expect in every SQL platform are as follows: 
 
-Symbol  | Operation 
--------------------|------------------
-+ | Adds two numbers
-- | Subtracts two numbers
-* | Multiplies two numbers
-/ | Divides two numbers
-% | Divides, but returns remainder
+| Symbol | Operation                       |
+|--------|----------------------------------|
+| `+`    | Adds two numbers                |
+| `-`    | Subtracts two numbers            |
+| `*`    | Multiplies two numbers           |
+| `/`    | Divides two numbers              |
+| `%`    | Divides, but returns remainder   |
 
 Note that these mathematical operators only work between numeric values or fields. These symbols may be used in other contexts, such as the `*` can mean "select all columns" but between two numbers it is a multiplication.
 
