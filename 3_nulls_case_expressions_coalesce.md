@@ -218,6 +218,16 @@ GROUP BY LOCATION_ID;
 |<br>
 |<br>
 |<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
 v 
 
 ```sql
