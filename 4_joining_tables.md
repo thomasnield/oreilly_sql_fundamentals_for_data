@@ -241,6 +241,16 @@ GROUP BY PRODUCT.PRODUCT_ID, PRODUCT_NAME;
 |<br>
 |<br>
 |<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
 v 
 
 ```sql
